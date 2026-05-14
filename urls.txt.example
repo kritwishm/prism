@@ -1,0 +1,8 @@
+# One company URL per line. Lines starting with # are skipped.
+# Use with: python run.py batch urls.txt --dump examples/runs
+
+https://www.hioscar.com
+https://cityblock.com
+https://www.devoted.com
+https://www.includedhealth.com
+https://www.glossier.com

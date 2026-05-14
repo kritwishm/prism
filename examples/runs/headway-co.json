@@ -1,0 +1,171 @@
+{
+  "summary": {
+    "success": true,
+    "domain": "headway.co",
+    "company_name": "Headway",
+    "icp_score": 79,
+    "icp_tier": "B",
+    "hubspot_id": "322626339539",
+    "sanity_url": "https://3vikhu00.sanity.studio/desk/companyAnalysis;companyAnalysis.headway.co",
+    "data_confidence": "high"
+  },
+  "scrape": {
+    "domain": "headway.co",
+    "pages_attempted": 10,
+    "pages_succeeded": 9,
+    "confidence": "high",
+    "page_urls": [
+      "https://headway.co/",
+      "https://care.headway.co/therapists/oregon/specialty/anxiety-depression",
+      "https://headway.co/about-us",
+      "https://headway.co/blog",
+      "https://headway.co/press",
+      "https://headway.co/blog/headway-expands-its-ehr",
+      "https://headway.co/about",
+      "https://headway.co/company",
+      "https://headway.co/our-story"
+    ]
+  },
+  "facts": {
+    "company_name": "Headway",
+    "one_line_description": "Connects patients with mental health providers who accept insurance coverage",
+    "industry": "Healthcare Technology",
+    "sub_vertical": "Mental Health / Behavioral Health",
+    "products_services": [
+      "Provider directory and search platform for therapists and psychiatrists",
+      "Insurance verification and billing services for providers",
+      "Free insurance-native EHR (Electronic Health Record) system with AI assistance",
+      "Virtual therapy platform",
+      "Provider portal"
+    ],
+    "buyer_personas": [
+      "Patients with insurance seeking therapists or psychiatrists",
+      "Independent mental health providers wanting to accept insurance",
+      "Health plans looking to expand mental health network"
+    ],
+    "stated_value_props": [
+      "Mental health care covered by insurance",
+      "Building a new mental healthcare system that everyone can access",
+      "Insurance-native EHR built specifically for mental health providers",
+      "Handles insurance credentialing and billing for providers",
+      "Free EHR for providers",
+      "Provider referral program ($350 incentive)"
+    ],
+    "customer_segments": [
+      "Patients seeking mental health care",
+      "Mental health providers (therapists and psychiatrists)",
+      "Health insurance plans"
+    ],
+    "recent_themes": [
+      "EHR expansion with AI assistance (September 2025)",
+      "Hiring Dr. Neha Chaudhary as Chief Medical Officer (August 2025)",
+      "Appointing Arnaud Ferreri as first Chief Technology Officer (January 2025)",
+      "Leadership team expansion to support growth",
+      "Focus on quality and accessibility of mental health care",
+      "Company cultural principles and values"
+    ],
+    "tone_signals": "Mission-driven, accessible, professional, patient-centric, growth-focused. Emphasizes building a 'new system' and transformation rather than incremental improvement. Founder-led with emphasis on company culture and values.",
+    "social_proof": [
+      "700+ employee team",
+      "86% of American patients currently in mental health care reporting positive outcomes",
+      "Operates across major US cities including New York, Los Angeles, Chicago, Houston, San Francisco, and others"
+    ]
+  },
+  "icp": {
+    "icp_score": 79,
+    "icp_tier": "B",
+    "icp_reasoning": "Total 79 \u2192 Tier B. Industry 25/30. Scale 13/25. Network 24/25. Growth 7/10. Readiness 10/10.",
+    "score_breakdown": {
+      "industry_fit": {
+        "score": 25,
+        "rationale": "[DIGITAL_HEALTH_CLINICAL] Headway operates a virtual therapy platform connecting patients with mental health providers (therapists and psychiatrists) who deliver clinical care. They provide insurance verification, billing services, and an EHR system specifically for mental health providers. This is core digital health with direct clinical service delivery.",
+        "confidence": 95
+      },
+      "scale_signals": {
+        "score": 13,
+        "rationale": "[UNKNOWN, enterprise customers] 700+ employee team and operates across major US cities (New York, Los Angeles, Chicago, Houston, San Francisco). Buyer personas explicitly include 'Health plans looking to expand mental health network,' indicating enterprise health plan customers, though no specific health plans are named. 86% patient outcome metric suggests significant patient volume, but exact member count not stated.",
+        "confidence": 70
+      },
+      "provider_network_signal": {
+        "score": 24,
+        "rationale": "[RUNS_MULTI_STATE_NETWORK] Headway operates a provider directory and search platform for therapists and psychiatrists across major US cities including New York, Los Angeles, Chicago, Houston, San Francisco, and others. They handle insurance credentialing and billing for independent mental health providers across multiple states, indicating they operate and manage a multi-state provider network.",
+        "confidence": 90
+      },
+      "growth_maturity": {
+        "score": 7,
+        "rationale": "[ACTIVE_GROWTH] Recent leadership expansion with hiring of first Chief Technology Officer (January 2025) and Chief Medical Officer (August 2025). EHR expansion with AI assistance (September 2025). 700+ employee team. Recent themes emphasize 'leadership team expansion to support growth.' Growth-focused tone with mission to build a 'new system' suggests active scaling.",
+        "confidence": 85
+      },
+      "buying_readiness": {
+        "score": 10,
+        "rationale": "[EXPLICIT] Headway explicitly handles 'insurance credentialing and billing for providers' as a core value proposition. Their stated services include credentialing support for mental health providers, which is directly in CertifyOS's product space. They manage provider enrollment across multiple states and insurance plans.",
+        "confidence": 92
+      }
+    },
+    "score_confidence": 86,
+    "intent_themes": [
+      {
+        "theme": "Multi-state provider credentialing automation for mental health network",
+        "confidence": 88
+      },
+      {
+        "theme": "Insurance enrollment and billing automation for independent providers",
+        "confidence": 85
+      },
+      {
+        "theme": "Provider network expansion and management across health plans",
+        "confidence": 78
+      },
+      {
+        "theme": "Provider licensing compliance across multiple state jurisdictions",
+        "confidence": 72
+      }
+    ],
+    "pain_points": [
+      {
+        "pain": "Managing credentialing for growing network of independent mental health providers across multiple states",
+        "evidence": "Headway handles 'insurance credentialing and billing for providers' as a core service and operates across major US cities, suggesting they face ongoing credentialing burden as they onboard new providers in new states",
+        "confidence": 82
+      },
+      {
+        "pain": "Scaling provider enrollment with multiple health insurance plans",
+        "evidence": "Buyer personas include 'Health plans looking to expand mental health network' and they provide 'insurance verification and billing services,' indicating complexity in managing provider enrollment across various payers",
+        "confidence": 78
+      },
+      {
+        "pain": "Maintaining licensing compliance for therapists and psychiatrists practicing across state lines via virtual care",
+        "evidence": "Operates a 'virtual therapy platform' across multiple major US cities, which requires tracking multi-state licensing requirements for providers delivering telehealth services",
+        "confidence": 75
+      },
+      {
+        "pain": "Operational overhead in provider network management amid rapid growth",
+        "evidence": "Recent CTO and CMO hires, 700+ employee team, and stated focus on 'leadership team expansion to support growth' suggests scaling challenges in managing provider operations",
+        "confidence": 68
+      }
+    ],
+    "missing_data": [
+      "Specific member or patient count (total lives covered)",
+      "Named health plan partners or customers",
+      "Number of providers in network",
+      "Number of states where they are currently operational",
+      "Recent funding rounds or valuation",
+      "Specific hiring velocity or headcount growth rate",
+      "Current credentialing platform or manual processes used",
+      "Provider churn or time-to-credential metrics"
+    ]
+  },
+  "copy": {
+    "hero_headline": "Scale your mental health network without scaling credentialing chaos",
+    "subheadline": "Headway connects patients to thousands of mental health providers across states. CertifyOS automates the credentialing, licensing, and enrollment that stands between you and faster growth.",
+    "value_prop_one_liner": "Purpose-built infrastructure for digital health companies managing multi-state provider networks and multi-plan enrollment at scale.",
+    "pain_paragraph": "You're onboarding independent therapists and psychiatrists across major markets\u2014New York, LA, Chicago, SF, Houston. Each new provider means credentialing with dozens of health plans, tracking licenses in multiple states, and managing virtual care compliance. Your 700-person team is growing fast, but credentialing remains slow and manual. It delays provider launch, blocks network expansion, and pulls your ops team away from higher-impact work.",
+    "cta_primary": {
+      "text": "See how CertifyOS works",
+      "intent": "demo"
+    },
+    "cta_secondary": {
+      "text": "Read the digital health playbook",
+      "intent": "content"
+    }
+  }
+}

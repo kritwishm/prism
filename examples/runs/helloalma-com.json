@@ -1,0 +1,167 @@
+{
+  "summary": {
+    "success": true,
+    "domain": "helloalma.com",
+    "company_name": "Alma",
+    "icp_score": 76,
+    "icp_tier": "B",
+    "hubspot_id": "322718849748",
+    "sanity_url": "https://3vikhu00.sanity.studio/desk/companyAnalysis;companyAnalysis.helloalma.com",
+    "data_confidence": "high"
+  },
+  "scrape": {
+    "domain": "helloalma.com",
+    "pages_attempted": 10,
+    "pages_succeeded": 10,
+    "confidence": "high",
+    "page_urls": [
+      "https://helloalma.com/",
+      "https://helloalma.com/blog",
+      "https://secure.helloalma.com/providers-results/christian_brothers_services",
+      "https://secure.helloalma.com/providers-results/lucent_health_solutions_cigna",
+      "https://secure.helloalma.com/providers-results/uhc_shared_services",
+      "https://helloalma.com/about",
+      "https://helloalma.com/about-us",
+      "https://helloalma.com/company",
+      "https://helloalma.com/our-story",
+      "https://helloalma.com/why"
+    ]
+  },
+  "facts": {
+    "company_name": "Alma",
+    "one_line_description": "A platform that connects people seeking therapy with mental health providers and helps therapists manage insurance and practice operations.",
+    "industry": "Healthcare Technology",
+    "sub_vertical": "Mental Health / Behavioral Health",
+    "products_services": [
+      "Therapist directory and matching platform",
+      "Insurance credentialing and billing support for providers",
+      "EHR (Electronic Health Records) tools",
+      "Provider membership program",
+      "Insurance program for therapists"
+    ],
+    "buyer_personas": [
+      "Adults with anxiety or depression seeking affordable therapy",
+      "Parents looking for child therapists",
+      "Couples seeking relationship counseling",
+      "Mental health providers wanting insurance credentialing support",
+      "Therapists in private practice seeking administrative support"
+    ],
+    "stated_value_props": [
+      "Find therapy covered by insurance",
+      "Find the right therapist fit",
+      "Affordable, in-network care",
+      "Simple, supportive search process",
+      "Support therapists so they can focus on client care",
+      "Simplify access to high-quality, affordable mental health care"
+    ],
+    "customer_segments": [
+      "Individuals seeking therapy",
+      "Parents seeking therapy for children",
+      "Couples seeking therapy",
+      "Families seeking therapy",
+      "Mental health providers (therapists, psychiatrists, counselors)",
+      "Insurance payers"
+    ],
+    "recent_themes": [
+      "Insurance coverage and affordability",
+      "Finding the right therapist fit",
+      "Supporting mental health providers",
+      "DEI and social impact",
+      "Simplifying access to care",
+      "Provider education and resources"
+    ],
+    "tone_signals": "Supportive, accessible, empathetic, mission-driven, emphasizes personalization and the importance of finding the right fit for therapy",
+    "social_proof": [
+      "Named one of Inc. Magazine's Best Workplaces in 2022",
+      "5,940 therapists for life transitions",
+      "2,168 therapists for medication management",
+      "2,546 therapists specializing in LGBTQIA+ care"
+    ]
+  },
+  "icp": {
+    "icp_score": 76,
+    "icp_tier": "B",
+    "icp_reasoning": "Total 76 \u2192 Tier B. Industry 25/30. Scale 10/25. Network 24/25. Growth 7/10. Readiness 10/10.",
+    "score_breakdown": {
+      "industry_fit": {
+        "score": 25,
+        "rationale": "[DIGITAL_HEALTH_CLINICAL] Alma is a mental health/behavioral health platform that connects therapy seekers with mental health providers. They operate a therapist directory and matching platform, offer insurance programs, and provide clinical care delivery through their provider network. This is squarely in the digital health + clinical delivery space.",
+        "confidence": 95
+      },
+      "scale_signals": {
+        "score": 10,
+        "rationale": "[UNKNOWN] Social proof mentions thousands of therapists (5,940 for life transitions, 2,168 for medication management, 2,546 for LGBTQIA+ care), suggesting a network of at least 5,000-6,000+ providers. However, no member/patient count is stated, and no named enterprise customers or case studies are provided. The therapist counts imply scale but we lack direct member metrics.",
+        "confidence": 60
+      },
+      "provider_network_signal": {
+        "score": 24,
+        "rationale": "[RUNS_MULTI_STATE_NETWORK] Alma operates a therapist directory and matching platform with thousands of mental health providers (5,940+ therapists cited in various specialties). They provide 'insurance credentialing and billing support for providers' and run an 'insurance program for therapists,' indicating they manage a provider network and handle credentialing/enrollment operations. The scale (thousands of providers) and national scope of mental health platforms strongly suggest multi-state operations.",
+        "confidence": 85
+      },
+      "growth_maturity": {
+        "score": 7,
+        "rationale": "[ACTIVE_GROWTH] Named one of Inc. Magazine's Best Workplaces in 2022, which typically correlates with growing companies. The large provider counts and focus on 'supporting mental health providers' and 'simplifying access to care' suggest they are actively scaling their network. Recent themes include provider education and expanding access, indicating momentum, though no explicit funding or hiring announcements are present in the facts.",
+        "confidence": 70
+      },
+      "buying_readiness": {
+        "score": 10,
+        "rationale": "[EXPLICIT] Alma's core product offering includes 'Insurance credentialing and billing support for providers' as a stated service. This is a direct, explicit mention of credentialing\u2014exactly the pain point CertifyOS addresses. They are actively managing credentialing for thousands of therapists, making this an explicit signal of needing provider data infrastructure and credentialing automation.",
+        "confidence": 90
+      }
+    },
+    "score_confidence": 81,
+    "intent_themes": [
+      {
+        "theme": "Multi-state provider credentialing and insurance enrollment for a growing therapist network",
+        "confidence": 88
+      },
+      {
+        "theme": "Ongoing credentialing maintenance and monitoring for thousands of mental health providers",
+        "confidence": 82
+      },
+      {
+        "theme": "Provider licensing compliance across multiple states for behavioral health practitioners",
+        "confidence": 75
+      }
+    ],
+    "pain_points": [
+      {
+        "pain": "Manual credentialing operations for thousands of therapists across multiple insurance payers",
+        "evidence": "Alma provides 'insurance credentialing and billing support for providers' and has 5,940+ therapists in their network. Managing credentialing at this scale manually is operationally intensive and error-prone.",
+        "confidence": 85
+      },
+      {
+        "pain": "Maintaining up-to-date provider licensing and credentials across state lines for behavioral health network",
+        "evidence": "Operating a national mental health provider platform with thousands of therapists implies multi-state licensing requirements. Their 'provider membership program' and credentialing support services require constant monitoring of license renewals and compliance.",
+        "confidence": 78
+      },
+      {
+        "pain": "Scaling credentialing operations to support rapid provider network growth",
+        "evidence": "Recent themes include 'Supporting mental health providers' and the company is in active growth (Inc. Best Workplaces 2022). Adding new therapists at scale requires fast, reliable credentialing workflows.",
+        "confidence": 72
+      }
+    ],
+    "missing_data": [
+      "Actual member/patient count or member count band",
+      "Number of states where provider network operates",
+      "Recent funding rounds or expansion announcements",
+      "Number of insurance payer partnerships",
+      "Current headcount or recent hiring trends",
+      "Named health plan or enterprise partners"
+    ]
+  },
+  "copy": {
+    "hero_headline": "Credentialing infrastructure built for mental health networks",
+    "subheadline": "Alma supports thousands of therapists with insurance credentialing. CertifyOS automates the data infrastructure behind it\u2014so your team can scale without the manual chaos.",
+    "value_prop_one_liner": "Purpose-built APIs and workflows to credential, monitor, and maintain provider data across payers and state lines\u2014in real time.",
+    "pain_paragraph": "When you're supporting 5,000+ therapists across state lines, manual credentialing doesn't scale. License renewals, multi-state enrollment, payer rosters\u2014it's all spreadsheets, email threads, and firefighting. Your ops team spends more time chasing paperwork than onboarding providers. CertifyOS gives you the data layer to automate credentialing, monitor compliance, and keep your network current.",
+    "cta_primary": {
+      "text": "See how it works",
+      "intent": "demo"
+    },
+    "cta_secondary": {
+      "text": "Read the product overview",
+      "intent": "content"
+    }
+  }
+}

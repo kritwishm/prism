@@ -1,0 +1,17 @@
+# Loom demo lineup — one per tier
+# Run with: python run.py batch urls-demo.txt --dump examples/runs
+
+# Tier A — textbook health-plan ICP
+https://www.devoted.com
+
+# Tier B — digital health with explicit credentialing pain
+https://headway.co
+
+# Tier C — healthcare but patient-side, not provider-side
+https://www.phreesia.com
+
+# Tier D — healthcare brand, no provider network
+https://www.goodrx.com
+
+# Tier D — extreme misfit, consumer brand sanity check
+https://www.glossier.com

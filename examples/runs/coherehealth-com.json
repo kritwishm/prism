@@ -1,0 +1,132 @@
+{
+  "summary": {
+    "success": true,
+    "domain": "coherehealth.com",
+    "company_name": "Cohere Health",
+    "icp_score": 33,
+    "icp_tier": "D",
+    "hubspot_id": "322719123150",
+    "sanity_url": "",
+    "data_confidence": "high"
+  },
+  "scrape": {
+    "domain": "coherehealth.com",
+    "pages_attempted": 10,
+    "pages_succeeded": 10,
+    "confidence": "high",
+    "page_urls": [
+      "https://coherehealth.com/",
+      "https://www.coherehealth.com/",
+      "https://www.coherehealth.com/platform",
+      "https://www.coherehealth.com/solutions/health-plan",
+      "https://www.coherehealth.com/our-story",
+      "https://www.coherehealth.com/press",
+      "https://www.coherehealth.com/blog",
+      "https://www.coherehealth.com/solutions/providers",
+      "https://www.coherehealth.com/why-cohere",
+      "https://www.coherehealth.com/connect/customer"
+    ]
+  },
+  "facts": {
+    "company_name": "Cohere Health",
+    "one_line_description": "AI-powered clinical intelligence platform for health plan utilization management and payment integrity",
+    "industry": "Healthcare Technology",
+    "sub_vertical": "Healthcare AI / Prior Authorization / Utilization Management",
+    "products_services": [
+      "Cohere Unify Platform - clinical intelligence platform with AI-driven automation",
+      "Prior Authorization Automation - automated care request workflow with 85% real-time approvals",
+      "Utilization Management Solutions - AI-powered UM for health plans",
+      "Payment Integrity Solutions - AI-powered payment accuracy and audit capabilities",
+      "Clinical Decision Support - evidence-based care recommendations and real-time clinical insights",
+      "Provider Portal - digital intake solution with 94% adoption rate"
+    ],
+    "buyer_personas": [
+      "Health Plan Executives",
+      "Utilization Management Directors",
+      "Payment Integrity Leaders",
+      "Provider Network Leaders",
+      "Healthcare Providers/Clinicians"
+    ],
+    "stated_value_props": [
+      "85% prior authorizations approved in real-time",
+      "44-47% admin-cost savings",
+      "66-70% faster care access",
+      "7-8x return on investment for payments",
+      "88-93% provider satisfaction (NPS Score of 67)",
+      "94% provider adoption rate",
+      "Reduces vendor dependency and eliminates 30%+ contingency fees",
+      "Transparent AI vs opaque vendor algorithms",
+      "Clinical-grade precision AI fine-tuned by medical specialty",
+      "Seamless EHR integration and intelligent assistance",
+      "Unified platform connecting UM and PI operations",
+      "Flexible deployment: in-house, delegated, or hybrid"
+    ],
+    "customer_segments": [
+      "Health Plans",
+      "Healthcare Payers",
+      "Healthcare Providers",
+      "Clinicians"
+    ],
+    "recent_themes": [
+      "Clinical-grade AI and responsible AI deployment",
+      "Eliminating legacy opaque payment integrity vendors",
+      "Unified payer-provider collaboration",
+      "Transparent vs opaque algorithms in healthcare",
+      "Provider-first digital workflows",
+      "Integration of utilization management and payment integrity",
+      "Reducing administrative burden in healthcare",
+      "Real-time clinical decision support",
+      "Gold carding alternatives and customized authorization programs"
+    ],
+    "tone_signals": "Professional, clinical, evidence-based, provider-centric, transparent. Emphasizes partnership between payers and providers. Positions against legacy vendors and opaque systems. Uses clinical credibility and data-driven results.",
+    "social_proof": [
+      "Built for plans. Trusted by clinicians.",
+      "Industry-leading provider satisfaction scores (NPS Score of 67)",
+      "94% provider adoption rate for digital intake solution"
+    ]
+  },
+  "icp": {
+    "icp_score": 33,
+    "icp_tier": "D",
+    "icp_reasoning": "Total 33 \u2192 Tier D. Industry 13/30. Scale 10/25. Network 2/25. Growth 7/10. Readiness 1/10.",
+    "score_breakdown": {
+      "industry_fit": {
+        "score": 13,
+        "rationale": "[ADJACENT_HEALTHCARE] Cohere Health is a clinical intelligence platform focused on utilization management, prior authorization, and payment integrity for health plans. They sell TO health plans rather than being a health plan themselves. Their products (UM automation, prior auth, payment integrity) are healthcare infrastructure/SaaS tools that support health plan operations.",
+        "confidence": 95
+      },
+      "scale_signals": {
+        "score": 10,
+        "rationale": "[UNKNOWN] No specific member count, revenue figures, or named customers mentioned in the facts. The company describes itself as 'Built for plans. Trusted by clinicians' with strong adoption metrics (94% provider adoption, NPS of 67), suggesting they have customers, but no enterprise logos or specific customer names are provided.",
+        "confidence": 70
+      },
+      "provider_network_signal": {
+        "score": 2,
+        "rationale": "[NONE] Cohere Health is a SaaS vendor that provides utilization management and prior authorization software to health plans. They have a 'Provider Portal' and work WITH providers through their clients' workflows, but they do not operate, manage, or credential a provider network themselves. They are a technology platform vendor, not a network operator.",
+        "confidence": 85
+      },
+      "growth_maturity": {
+        "score": 7,
+        "rationale": "[ACTIVE_GROWTH] Strong product momentum with multiple integrated solutions (UM, prior auth, payment integrity) unified into a single platform. Recent themes emphasize 'eliminating legacy vendors' and 'clinical-grade AI deployment,' suggesting competitive expansion. High adoption metrics (94% provider adoption, 67 NPS) indicate market traction. However, no explicit funding, hiring, or expansion announcements in the provided facts.",
+        "confidence": 75
+      },
+      "buying_readiness": {
+        "score": 1,
+        "rationale": "[NONE] Cohere Health is a VENDOR that sells prior authorization and UM solutions. There is no signal they would buy credentialing, licensing, or provider data infrastructure from CertifyOS. Their provider portal is about clinical intake and authorization workflows, not provider credentialing or enrollment. They are not operating a provider network that would require multi-state licensing or credentialing automation.",
+        "confidence": 95
+      }
+    },
+    "score_confidence": 84,
+    "intent_themes": [],
+    "pain_points": [],
+    "missing_data": [
+      "Named health plan customers or case studies",
+      "Revenue or funding information",
+      "Number of health plans served or total members covered",
+      "Whether they manage any delegated network services for clients",
+      "Whether their payment integrity work includes provider credentialing verification",
+      "Company size, employee count, or recent hiring trends"
+    ]
+  },
+  "copy": null
+}

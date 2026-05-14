@@ -1,0 +1,107 @@
+{
+  "summary": {
+    "success": true,
+    "domain": "www.glossier.com",
+    "company_name": "Glossier",
+    "icp_score": 19,
+    "icp_tier": "D",
+    "hubspot_id": "322718995152",
+    "sanity_url": "https://3vikhu00.sanity.studio/desk/companyAnalysis;companyAnalysis.www.glossier.com",
+    "data_confidence": "high"
+  },
+  "scrape": {
+    "domain": "www.glossier.com",
+    "pages_attempted": 10,
+    "pages_succeeded": 6,
+    "confidence": "high",
+    "page_urls": [
+      "https://www.glossier.com/",
+      "https://www.glossier.com/sitemap_blogs_1.xml",
+      "https://www.glossier.com/en-tt/sitemap_blogs_1.xml",
+      "https://www.glossier.com/en-sk/sitemap_blogs_1.xml",
+      "https://www.glossier.com/en-ca/sitemap_products_1.xml",
+      "https://www.glossier.com/en-ca/sitemap_blogs_1.xml"
+    ]
+  },
+  "facts": {
+    "company_name": "Glossier",
+    "one_line_description": "Beauty and cosmetics company selling skincare and makeup products direct to consumers globally",
+    "industry": "Beauty & Cosmetics",
+    "sub_vertical": "Direct-to-Consumer Beauty",
+    "products_services": [
+      "Skincare products",
+      "Makeup products",
+      "Beauty products"
+    ],
+    "buyer_personas": [],
+    "stated_value_props": [
+      "Free standard shipping on qualifying orders",
+      "International shipping available",
+      "Retail store experiences"
+    ],
+    "customer_segments": [
+      "Direct-to-consumer beauty shoppers",
+      "International beauty consumers"
+    ],
+    "recent_themes": [
+      "New CEO appointment (2023)",
+      "Grant program for community support",
+      "Retail employee experience improvements",
+      "International expansion"
+    ],
+    "tone_signals": "Consumer-friendly, accessible, community-focused with emphasis on free shipping incentives and international availability",
+    "social_proof": []
+  },
+  "icp": {
+    "icp_score": 19,
+    "icp_tier": "D",
+    "icp_reasoning": "Total 19 \u2192 Tier D. Industry 2/30. Scale 10/25. Network 2/25. Growth 4/10. Readiness 1/10.",
+    "score_breakdown": {
+      "industry_fit": {
+        "score": 2,
+        "rationale": "[NOT_HEALTHCARE] Glossier is a 'Beauty and cosmetics company selling skincare and makeup products direct to consumers globally' in the 'Beauty & Cosmetics' industry. This is a consumer beauty/retail business with no healthcare connection.",
+        "confidence": 100
+      },
+      "scale_signals": {
+        "score": 10,
+        "rationale": "[UNKNOWN] No member/customer count data provided. The company serves 'Direct-to-consumer beauty shoppers' and 'International beauty consumers' but no specific enterprise customers, case studies, or logos are mentioned. Member count is not applicable for a B2C cosmetics brand.",
+        "confidence": 95
+      },
+      "provider_network_signal": {
+        "score": 2,
+        "rationale": "[NONE] Glossier is a direct-to-consumer beauty and cosmetics company with no involvement in healthcare provider networks, credentialing, or provider relationships of any kind.",
+        "confidence": 100
+      },
+      "growth_maturity": {
+        "score": 4,
+        "rationale": "[STABLE] Recent themes include 'New CEO appointment (2023)' and 'International expansion,' suggesting some activity. However, there are no explicit signals of rapid hiring, recent funding, or hyper-growth indicators. The CEO change and retail improvements suggest ongoing operations rather than explosive scaling.",
+        "confidence": 70
+      },
+      "buying_readiness": {
+        "score": 1,
+        "rationale": "[NONE] No signals related to credentialing, licensing, provider enrollment, network management, or provider data infrastructure. All themes focus on consumer beauty retail operations, shipping, and community programs.",
+        "confidence": 100
+      }
+    },
+    "score_confidence": 96,
+    "intent_themes": [],
+    "pain_points": [],
+    "missing_data": [
+      "This is a B2C cosmetics company with zero relevance to CertifyOS's healthcare provider data infrastructure product. No additional data would change the classification."
+    ]
+  },
+  "copy": {
+    "hero_headline": "Healthcare provider data infrastructure built for health plans",
+    "subheadline": "CertifyOS automates credentialing, enrollment, and network management for payers and digital health companies that contract with providers.",
+    "value_prop_one_liner": "We help healthcare organizations manage provider networks, state licensing, and regulatory compliance\u2014not a fit for consumer retail.",
+    "pain_paragraph": "CertifyOS is purpose-built for health plans, TPAs, and digital health platforms that credential doctors, nurses, and therapists. If your business contracts with healthcare providers or manages a clinical network, we'd love to talk. If you're in retail, e-commerce, or consumer goods, we're probably not the right solution.",
+    "cta_primary": {
+      "text": "Learn about our platform",
+      "intent": "content"
+    },
+    "cta_secondary": {
+      "text": "Contact us",
+      "intent": "contact"
+    }
+  }
+}

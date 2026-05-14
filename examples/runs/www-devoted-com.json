@@ -1,0 +1,165 @@
+{
+  "summary": {
+    "success": true,
+    "domain": "www.devoted.com",
+    "company_name": "Devoted Health",
+    "icp_score": 90,
+    "icp_tier": "A",
+    "hubspot_id": "322695317217",
+    "sanity_url": "https://3vikhu00.sanity.studio/desk/companyAnalysis;companyAnalysis.www.devoted.com",
+    "data_confidence": "high"
+  },
+  "scrape": {
+    "domain": "www.devoted.com",
+    "pages_attempted": 10,
+    "pages_succeeded": 10,
+    "confidence": "high",
+    "page_urls": [
+      "https://www.devoted.com/",
+      "https://www.devoted.com/about",
+      "https://www.devoted.com/about-us",
+      "https://www.devoted.com/company",
+      "https://www.devoted.com/our-story",
+      "https://www.devoted.com/why",
+      "https://www.devoted.com/what-we-do",
+      "https://www.devoted.com/product",
+      "https://www.devoted.com/products",
+      "https://www.devoted.com/solutions"
+    ]
+  },
+  "facts": {
+    "company_name": "Devoted Health",
+    "one_line_description": "Medicare Advantage health insurance plans with comprehensive benefits and member support services for older Americans",
+    "industry": "Healthcare Insurance",
+    "sub_vertical": "Medicare Advantage",
+    "products_services": [
+      "Medicare Advantage plans",
+      "Devoted Medical (in-house medical group providing virtual and in-home care)",
+      "Member Service Guide (healthcare concierge)",
+      "24/7 Care OnDemand",
+      "MyDevoted member portal",
+      "Provider and pharmacy networks"
+    ],
+    "buyer_personas": [
+      "Medicare-eligible seniors seeking comprehensive coverage",
+      "Individuals looking for coordinated healthcare with personalized support",
+      "Seniors wanting to save on healthcare costs with $0 premium options"
+    ],
+    "stated_value_props": [
+      "Monthly premiums starting at $0",
+      "Comprehensive benefits including Food & Home Card, dental, vision, hearing, prescription drugs, and OTC allowances",
+      "U.S.-based member service team (Guides) acting as healthcare concierge",
+      "Coordination between Devoted Medical clinicians and primary care providers",
+      "Technology platform designed for members, not just billing and claims",
+      "Right care, right place, right time through coordinated, proactive healthcare delivery"
+    ],
+    "customer_segments": [
+      "Medicare beneficiaries",
+      "Older Americans",
+      "People 65+ or eligible for Medicare"
+    ],
+    "recent_themes": [
+      "2026 Medicare plan enrollment",
+      "Addressing chronic diseases through coordinated care",
+      "Improving U.S. healthcare outcomes while reducing costs",
+      "Expanding service to 29 states across the U.S.",
+      "Integration of technology with human-centered care"
+    ],
+    "tone_signals": "Empathetic, member-focused, relationship-driven, trustworthy, accessible. Emphasizes listening to members and supporting their well-being beyond traditional health insurance. Uses plain language and highlights personal support through Guides.",
+    "social_proof": [
+      "Serves members in 29 states",
+      "Founded in 2017",
+      "Member testimonials mentioned (Opie, Judy)"
+    ]
+  },
+  "icp": {
+    "icp_score": 90,
+    "icp_tier": "A",
+    "icp_reasoning": "Total 90 \u2192 Tier A. Industry 29/30. Scale 23/25. Network 24/25. Growth 7/10. Readiness 7/10.",
+    "score_breakdown": {
+      "industry_fit": {
+        "score": 29,
+        "rationale": "[HEALTH_PLAN] Devoted Health is a Medicare Advantage health insurance plan serving Medicare beneficiaries in 29 states. They are explicitly described as 'Healthcare Insurance' in the 'Medicare Advantage' sub-vertical.",
+        "confidence": 100
+      },
+      "scale_signals": {
+        "score": 23,
+        "rationale": "[OVER_1M, named customers] Devoted Health operates Medicare Advantage plans across 29 states and was founded in 2017. While exact member count is not stated, a Medicare Advantage plan operating in 29 states typically serves well over 100K members and likely over 1M. Named member testimonials (Opie, Judy) are mentioned. No enterprise customer relationships noted as they serve individual Medicare beneficiaries directly.",
+        "confidence": 75
+      },
+      "provider_network_signal": {
+        "score": 24,
+        "rationale": "[RUNS_MULTI_STATE_NETWORK] Devoted Health operates 'Provider and pharmacy networks' and 'Devoted Medical (in-house medical group providing virtual and in-home care)' across 29 states. They coordinate between Devoted Medical clinicians and primary care providers, indicating they manage a multi-state provider network.",
+        "confidence": 95
+      },
+      "growth_maturity": {
+        "score": 7,
+        "rationale": "[ACTIVE_GROWTH] Recent themes include 'Expanding service to 29 states across the U.S.' and '2026 Medicare plan enrollment'. Founded in 2017 and now operating in 29 states indicates sustained expansion, though no explicit funding or rapid hiring signals mentioned.",
+        "confidence": 80
+      },
+      "buying_readiness": {
+        "score": 7,
+        "rationale": "[STRONG_THEMES] Devoted Health operates a multi-state provider network requiring credentialing and licensing across 29 states. Recent themes mention 'Coordination between Devoted Medical clinicians and primary care providers' and expansion to 29 states, which strongly implies ongoing provider enrollment, credentialing, and network management needs. No explicit mention of credentialing pain, but operational reality of managing providers across 29 states creates implicit need.",
+        "confidence": 78
+      }
+    },
+    "score_confidence": 88,
+    "intent_themes": [
+      {
+        "theme": "Multi-state provider network credentialing and licensing automation",
+        "confidence": 78
+      },
+      {
+        "theme": "Provider enrollment and onboarding for Medicare Advantage network expansion",
+        "confidence": 75
+      },
+      {
+        "theme": "Ongoing provider license monitoring and compliance across 29-state footprint",
+        "confidence": 72
+      },
+      {
+        "theme": "Network adequacy reporting and CMS compliance for Medicare Advantage",
+        "confidence": 70
+      }
+    ],
+    "pain_points": [
+      {
+        "pain": "Managing provider credentialing and licensing across 29 states as they expand their Medicare Advantage network",
+        "evidence": "Devoted operates provider networks in 29 states and emphasizes 'Expanding service to 29 states across the U.S.' as a recent theme. Multi-state expansion creates complex credentialing requirements.",
+        "confidence": 75
+      },
+      {
+        "pain": "Coordinating and maintaining provider data between Devoted Medical clinicians and external primary care providers",
+        "evidence": "Value proposition includes 'Coordination between Devoted Medical clinicians and primary care providers', indicating need to manage provider relationships across in-house and external network.",
+        "confidence": 70
+      },
+      {
+        "pain": "Ensuring network adequacy and CMS compliance for Medicare Advantage plans across diverse state regulations",
+        "evidence": "As a Medicare Advantage plan in 29 states, they must meet CMS network adequacy requirements and comply with varying state credentialing regulations.",
+        "confidence": 68
+      }
+    ],
+    "missing_data": [
+      "Exact member count (would confirm scale band)",
+      "Recent funding rounds or hiring data (would clarify growth stage)",
+      "Technology stack or current credentialing systems (would strengthen intent)",
+      "Explicit pain points around provider operations or credentialing workflows",
+      "Number of providers in network",
+      "Whether they use in-house or outsourced credentialing operations"
+    ]
+  },
+  "copy": {
+    "hero_headline": "Provider credentialing built for Medicare Advantage plans scaling across states",
+    "subheadline": "Devoted Health manages networks in 29 states. CertifyOS gives MA plans one system to credential providers, monitor licenses, and stay CMS-compliant\u2014without the spreadsheets.",
+    "value_prop_one_liner": "Cut credentialing time in half and eliminate compliance gaps as you expand your Medicare Advantage network across state lines.",
+    "pain_paragraph": "Coordinating care between Devoted Medical clinicians and external PCPs means managing two provider populations across 29 state regulatory environments. Manual credentialing slows network expansion. Missed license renewals risk CMS audits. Fragmented data makes network adequacy reporting a scramble every quarter. Your members need access to the right providers\u2014your ops team needs infrastructure that scales with your footprint.",
+    "cta_primary": {
+      "text": "See how MA plans automate credentialing",
+      "intent": "demo"
+    },
+    "cta_secondary": {
+      "text": "Download: CMS compliance checklist",
+      "intent": "content"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# secrets
+.env
+.env.local
+.env.*.local
+render/.env
+render/.env.local
+
+# python
+__pycache__/
+*.pyc
+.venv/
+env/
+*.egg-info/
+
+# next.js
+render/node_modules/
+render/.next/
+render/out/
+
+# build artifacts
+dist/
+build/
+
+# tooling
+.DS_Store
+.playwright-mcp/
+*.log
+/tmp/

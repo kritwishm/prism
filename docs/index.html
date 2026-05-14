@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Prism - account research → personalized content pipeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0D10;
+  --bg-2:#11141A;
+  --surface:#161A21;
+  --surface-2:#1C2129;
+  --border:#262C36;
+  --border-2:#323844;
+  --text:#E8E6E1;
+  --text-dim:#A6ABB6;
+  --text-muted:#6B7280;
+  --accent:#B6FF3F;        /* lime - primary highlight, Tier A */
+  --accent-dim:#7BB42A;
+  --amber:#F5B440;          /* Tier B / warning */
+  --rust:#E36458;           /* Tier C/D / error */
+  --steel:#7EB7E8;          /* info / link */
+  --plum:#C19FE8;           /* secondary accent */
+  --rule:rgba(232,230,225,.08);
+  --serif:'Instrument Serif', ui-serif, Georgia, serif;
+  --sans:'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv11","tnum"}
+body{font-size:15px;line-height:1.6}
+a{color:var(--steel);text-decoration:none;border-bottom:1px solid rgba(126,183,232,.3)}
+a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+code,pre,.mono{font-family:var(--mono);font-feature-settings:"zero","ss01"}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* Layout */
+.shell{max-width:1180px;margin:0 auto;padding:0 32px}
+.nav{position:sticky;top:0;background:rgba(11,13,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);z-index:10}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:13px}
+.nav-mark{font-family:var(--serif);font-size:22px;letter-spacing:-.01em}
+.nav-mark em{color:var(--accent);font-style:normal}
+.nav-links{display:flex;gap:22px;color:var(--text-dim)}
+.nav-links a{color:inherit;border:none}
+.nav-links a:hover{color:var(--accent)}
+
+/* Hero */
+.hero{padding:120px 0 90px;border-bottom:1px solid var(--rule)}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
+.hero h1{font-family:var(--serif);font-size:clamp(56px,9vw,116px);line-height:.92;letter-spacing:-.025em;margin:0 0 28px;font-weight:400}
+.hero h1 em{font-style:italic;color:var(--text-dim)}
+.hero-sub{font-size:20px;line-height:1.5;color:var(--text-dim);max-width:62ch;margin:0 0 56px}
+.hero-sub strong{color:var(--text);font-weight:500}
+.hero-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.hero-meta>div{background:var(--bg);padding:22px 24px}
+.hero-meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin:0 0 8px}
+.hero-meta dd{margin:0;font-size:16px;color:var(--text)}
+
+/* Section */
+section{padding:96px 0;border-bottom:1px solid var(--rule)}
+.section-head{display:grid;grid-template-columns:120px 1fr;gap:48px;margin-bottom:48px;align-items:baseline}
+.section-num{font-family:var(--mono);font-size:13px;color:var(--text-muted);letter-spacing:.08em}
+.section-title{font-family:var(--serif);font-size:48px;line-height:1.05;letter-spacing:-.02em;margin:0;font-weight:400}
+.section-lede{grid-column:2;color:var(--text-dim);font-size:17px;max-width:62ch;margin:14px 0 0}
+.section-body{display:grid;grid-template-columns:120px 1fr;gap:48px}
+.section-body>.col{grid-column:2}
+
+/* Headings */
+h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em}
+h3{font-size:26px;margin:48px 0 16px;color:var(--text)}
+h4{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);margin:32px 0 12px}
+
+p{margin:0 0 14px}
+strong{color:var(--text);font-weight:600}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;font-size:14px;margin:18px 0}
+thead th{text-align:left;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);padding:14px 14px 12px;border-bottom:1px solid var(--border)}
+tbody td{padding:14px;border-bottom:1px solid var(--rule);vertical-align:top}
+tbody tr:hover{background:rgba(255,255,255,.015)}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--accent);font-weight:500}
+td.muted{color:var(--text-dim)}
+td.code{font-family:var(--mono);font-size:13px;color:var(--text)}
+
+/* Code/ASCII blocks */
+pre{font-family:var(--mono);font-size:13px;line-height:1.55;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:20px 24px;overflow-x:auto;color:var(--text-dim);margin:18px 0}
+pre.ascii{font-size:13px;line-height:1.4;color:var(--text)}
+pre .hl{color:var(--accent)}
+pre .am{color:var(--amber)}
+pre .ru{color:var(--rust)}
+pre .st{color:var(--steel)}
+pre .dim{color:var(--text-muted)}
+code.inline{background:var(--surface);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-size:.92em}
+
+/* Cards */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:26px}
+.card h4{margin-top:0;color:var(--accent)}
+.card-num{font-family:var(--mono);font-size:11px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:8px}
+.card h3{font-size:20px;margin:0 0 12px;color:var(--text)}
+.card p{color:var(--text-dim);font-size:14px;margin:0 0 10px}
+
+/* Pipeline diagram */
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:24px 0 12px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.pipe-stage{padding:24px 22px;border-right:1px solid var(--border);position:relative;background:var(--surface)}
+.pipe-stage:last-child{border-right:0}
+.pipe-stage .stage-n{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.12em;margin-bottom:10px}
+.pipe-stage .stage-title{font-family:var(--serif);font-size:22px;line-height:1.1;margin-bottom:10px;color:var(--text)}
+.pipe-stage .stage-desc{font-size:13px;color:var(--text-dim);line-height:1.5}
+.pipe-arrow{height:36px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-family:var(--mono);font-size:13px}
+
+/* Tier badge */
+.tier{display:inline-flex;align-items:center;gap:8px;padding:4px 10px;font-family:var(--mono);font-size:12px;font-weight:600;border-radius:3px;letter-spacing:.04em}
+.tier-A{background:rgba(182,255,63,.12);color:var(--accent);border:1px solid rgba(182,255,63,.3)}
+.tier-B{background:rgba(245,180,64,.12);color:var(--amber);border:1px solid rgba(245,180,64,.3)}
+.tier-C{background:rgba(193,159,232,.12);color:var(--plum);border:1px solid rgba(193,159,232,.3)}
+.tier-D{background:rgba(227,100,88,.12);color:var(--rust);border:1px solid rgba(227,100,88,.3)}
+
+/* Score breakdown bars */
+.bar-row{display:grid;grid-template-columns:200px 1fr 60px;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule);font-size:14px}
+.bar-row .label{color:var(--text-dim);font-size:13px}
+.bar-track{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden;position:relative}
+.bar-fill{height:100%;background:var(--accent);border-radius:99px}
+.bar-fill.dim{background:var(--steel)}
+.bar-fill.warn{background:var(--amber)}
+.bar-row .val{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;color:var(--accent);font-weight:500}
+
+/* Lookups */
+.lookup-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:24px}
+.lookup{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:22px 24px}
+.lookup-title{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.lookup-rows{display:grid;grid-template-columns:1fr auto;gap:6px 18px;font-size:13px;font-family:var(--mono)}
+.lookup-rows .k{color:var(--text-dim)}
+.lookup-rows .v{font-variant-numeric:tabular-nums;color:var(--text);font-weight:500;text-align:right}
+
+/* Quote / pull */
+.pull{font-family:var(--serif);font-size:30px;line-height:1.25;letter-spacing:-.01em;color:var(--text);max-width:24ch;margin:8px 0;font-style:italic}
+
+/* Two-column compare */
+.compare{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:24px 0}
+.compare>div{padding:24px 26px}
+.compare>div:first-child{border-right:1px solid var(--border);background:var(--surface)}
+.compare h4{margin-top:0}
+
+/* Decision table */
+.decisions{border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.decisions>div{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:0;border-bottom:1px solid var(--border)}
+.decisions>div:last-child{border-bottom:none}
+.decisions>div>div{padding:18px 22px;border-right:1px solid var(--border)}
+.decisions>div>div:last-child{border-right:0}
+.decisions .head{background:var(--surface);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+.decisions .why{color:var(--text-dim);font-size:14px}
+.decisions .rej{color:var(--rust);font-size:13px}
+
+/* Failure cards */
+.fail{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--rust);border-radius:4px;padding:22px 26px;margin:14px 0}
+.fail .rank{font-family:var(--mono);font-size:11px;color:var(--rust);letter-spacing:.12em;margin-bottom:6px}
+.fail h4{font-family:var(--serif);font-size:20px;text-transform:none;letter-spacing:-.01em;color:var(--text);margin:0 0 10px;font-weight:400}
+.fail .mit{color:var(--text-dim);font-size:14px}
+
+/* Footer */
+footer{padding:60px 0 80px;color:var(--text-muted);font-size:13px;text-align:center}
+footer .mono{color:var(--text-dim)}
+
+/* responsive */
+@media (max-width:880px){
+  .section-head,.section-body{grid-template-columns:1fr;gap:16px}
+  .section-body>.col{grid-column:1}
+  .section-lede{grid-column:1}
+  .grid-2,.grid-3,.lookup-grid,.pipeline,.compare,.decisions>div{grid-template-columns:1fr!important}
+  .pipe-stage{border-right:0;border-bottom:1px solid var(--border)}
+  .pipe-stage:last-child{border-bottom:0}
+  .hero h1{font-size:56px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="shell nav-inner">
+    <div class="nav-mark"><em>P</em>rism</div>
+    <div class="nav-links">
+      <a href="#pipeline">Pipeline</a>
+      <a href="#scoring">Scoring</a>
+      <a href="#data">Data model</a>
+      <a href="#failure">Failure</a>
+      <a href="#scale">Scale</a>
+      <a href="#signals">Signals</a>
+      <a href="#measure">Measurement</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero shell">
+  <div class="hero-eyebrow">CertifyOS · GTM Engineer · take-home</div>
+  <h1>Account research →<br><em>personalized content</em></h1>
+  <p class="hero-sub">
+    One company URL in. A <strong>scored ICP analysis</strong> and
+    <strong>page-ready landing copy</strong> out - written to Sanity CMS
+    and HubSpot CRM, with a transparent <strong>5-factor scoring formula</strong>
+    that is deterministic, auditable, and version-stamped on every record.
+  </p>
+  <dl class="hero-meta">
+    <div><dt>Pipeline shape</dt><dd>scrape → 3 Claude agents → write</dd></div>
+    <div><dt>LLM</dt><dd>Claude Sonnet 4 (tool-use)</dd></div>
+    <div><dt>Scoring</dt><dd>Deterministic Python</dd></div>
+    <div><dt>Stack</dt><dd>Python · httpx · Pydantic</dd></div>
+  </dl>
+</header>
+
+<!-- 01 - Overview -->
+<section id="overview">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">01 · OVERVIEW</div>
+      <h2 class="section-title">What it is, in five sentences.</h2>
+    </div>
+    <div class="section-body">
+      <div class="col">
+        <p>Prism is a CLI pipeline that turns a single company URL into structured intelligence and personalized landing-page copy. The scraper fetches and cleans the company's website via Jina Reader; three Claude agents then run in sequence to extract facts, classify the account along five ICP factors, and write page-ready copy. A deterministic Python function turns the classifications into a 0–100 ICP score and a tier. The result is written as a structured document to Sanity (the CMS) and upserted as a Company record in HubSpot (the CRM) with custom properties an AE can scan in a single glance.</p>
+        <p>The two systems are cross-linked: HubSpot holds the scoring summary an account owner needs daily; Sanity holds the rich, editable analysis and copy that drive the personalized page. A local JSON dump captures the full payload for replay and audit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 - Pipeline -->
+<section id="pipeline">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">02 · PIPELINE</div>
+      <h2 class="section-title">Five stages, each with one job.</h2>
+    </div>
+    <p class="section-lede">Sequential by design. Each LLM stage uses Claude's structured-output mode - the model can only return JSON matching the schema we hand it. Python then type-checks the response before it moves forward. If validation fails, we retry once with the error fed back into the prompt.</p>
+
+    <div class="pipeline">
+      <div class="pipe-stage">
+        <div class="stage-n">01</div>
+        <div class="stage-title">Scrape</div>
+        <div class="stage-desc">Jina Reader, layered URL discovery: sitemap.xml → homepage links → keyword fallback. ≤10 pages, role-tagged.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="stage-n">02</div>
+        <div class="stage-title">Extract</div>
+        <div class="stage-desc">Agent 1. Facts only - no speculation, no copy. Output shape locked by schema.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="stage-n">03</div>
+        <div class="stage-title">Classify + Score</div>
+        <div class="stage-desc">Agent 2 classifies along 5 ICP factors. Python sums to a tier. Deterministic.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="stage-n">04</div>
+        <div class="stage-title">Copy</div>
+        <div class="stage-desc">Agent 3 writes hero, subheadline, value prop, pain paragraph, and CTAs.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="stage-n">05</div>
+        <div class="stage-title">Write</div>
+        <div class="stage-desc">Sanity first (must succeed) → HubSpot upsert → patch HubSpot id back to Sanity.</div>
+      </div>
+    </div>
+
+<pre class="ascii">
+                           ┌────────────┐
+   one company URL ─────▶  │  SCRAPER   │   Jina + sitemap + links
+                           └─────┬──────┘
+                                 ▼
+                ┌──────────────────────────────────┐
+                │  AGENT 1   ▸  <span class="hl">EXTRACTOR</span>          │   facts only
+                └──────────────┬───────────────────┘
+                               ▼
+                ┌──────────────────────────────────┐
+                │  AGENT 2   ▸  <span class="hl">CLASSIFY 5 FACTORS</span> │   no scoring
+                └──────────────┬───────────────────┘
+                               ▼  ICPSignals
+                ┌──────────────────────────────────┐
+                │  <span class="am">scoring.py</span>  ▸  <span class="hl">DETERMINISTIC SUM</span>  │   pure Python
+                └──────────────┬───────────────────┘
+                               ▼
+                ┌──────────────────────────────────┐
+                │  AGENT 3   ▸  <span class="hl">COPYWRITER</span>         │   hero/sub/pain/CTA
+                └──────────────┬───────────────────┘
+                               │
+            ┌──────────────────┼──────────────────┐
+            ▼                  ▼                  ▼
+        ┌────────┐       ┌──────────┐      ┌───────────┐
+        │ SANITY │       │  HUBSPOT │      │ local JSON│
+        └────────┘       └──────────┘      └───────────┘
+</pre>
+
+  </div>
+</section>
+
+<!-- 03 - Scoring -->
+<section id="scoring">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">03 · SCORING</div>
+      <h2 class="section-title">The LLM classifies. <em style="font-style:italic;color:var(--accent)">Python scores.</em></h2>
+    </div>
+    <p class="section-lede">The model never emits points. It picks one enum value per factor and provides evidence. A pure Python function in <code class="inline">prism/scoring.py</code> maps each classification to its point value and sums to 100. Auditable. Reproducible. Tunable. Testable.</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-num">PROPERTY 01</div>
+        <h3>Auditable</h3>
+        <p>The formula lives in one file. No prompt-spelunking required to know how a score was produced.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">PROPERTY 02</div>
+        <h3>Reproducible</h3>
+        <p>Same signals → same score, every run. Zero LLM variance on the math itself.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">PROPERTY 03</div>
+        <h3>Tunable</h3>
+        <p>Reweight a factor by editing a constant. No prompt change, no re-eval of every historical record.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">PROPERTY 04</div>
+        <h3>Testable</h3>
+        <p><code class="inline">score_company(synthetic_signals) == expected_total</code> is a real unit test.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">PROPERTY 05</div>
+        <h3>A/B-able</h3>
+        <p>Ship <code class="inline">SCORING_VERSION v2.0</code>, route a cohort, measure which formula better predicts win rate.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">PROPERTY 06</div>
+        <h3>Evaluable</h3>
+        <p>Signal-extraction quality and scoring-formula correctness become independent evals.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:64px">The formula</h3>
+
+<pre class="ascii">
+  ICP_SCORE  =  <span class="hl">INDUSTRY_POINTS</span>[ industry.category ]              (max 30)
+             +  <span class="hl">SCALE_POINTS</span>  [ scale.member_count_band ]
+                  + <span class="st">ENTERPRISE_BONUS</span>   if has_enterprise_customers
+                  + <span class="st">NAMED_BONUS</span>        if has_named_customers
+                  capped at 25                                  (max 25)
+             +  <span class="hl">NETWORK_POINTS</span>[ provider_network.network_type ]  (max 25)
+             +  <span class="hl">GROWTH_POINTS</span> [ growth.stage ]                   (max 10)
+             +  <span class="hl">READINESS_POINTS</span>[ buying_readiness.level ]       (max 10)
+             ────────────────────────────────────────────────────
+             =  total                                           (0–100)
+</pre>
+
+    <h3>The 5 lookup tables</h3>
+
+    <div class="lookup-grid">
+      <div class="lookup">
+        <div class="lookup-title">Factor 1 · Industry  (max 30)</div>
+        <div class="lookup-rows">
+          <span class="k">HEALTH_PLAN</span>              <span class="v">29</span>
+          <span class="k">DIGITAL_HEALTH_CLINICAL</span>  <span class="v">25</span>
+          <span class="k">STAFFING_IPA_MSO</span>         <span class="v">19</span>
+          <span class="k">ADJACENT_HEALTHCARE</span>      <span class="v">13</span>
+          <span class="k">HEALTHCARE_ADJACENT</span>      <span class="v">7</span>
+          <span class="k">NOT_HEALTHCARE</span>           <span class="v">2</span>
+        </div>
+      </div>
+      <div class="lookup">
+        <div class="lookup-title">Factor 2 · Scale  (max 25)</div>
+        <div class="lookup-rows">
+          <span class="k">OVER_1M</span>          <span class="v">22</span>
+          <span class="k">100K_TO_1M</span>       <span class="v">17</span>
+          <span class="k">10K_TO_100K</span>      <span class="v">11</span>
+          <span class="k">UNDER_10K</span>        <span class="v">6</span>
+          <span class="k">PRE_REVENUE</span>      <span class="v">2</span>
+          <span class="k">UNKNOWN (midpoint)</span><span class="v">10</span>
+          <span class="k">+ enterprise bonus</span><span class="v">+3</span>
+          <span class="k">+ named bonus</span>   <span class="v">+1</span>
+        </div>
+      </div>
+      <div class="lookup">
+        <div class="lookup-title">Factor 3 · Provider Network  (max 25)</div>
+        <div class="lookup-rows">
+          <span class="k">RUNS_MULTI_STATE_NETWORK</span> <span class="v">24</span>
+          <span class="k">MANAGES_FOR_PARTNERS</span>     <span class="v">19</span>
+          <span class="k">PROVIDERS_PERIPHERAL</span>     <span class="v">13</span>
+          <span class="k">TANGENTIAL</span>               <span class="v">7</span>
+          <span class="k">NONE</span>                     <span class="v">2</span>
+        </div>
+      </div>
+      <div class="lookup">
+        <div class="lookup-title">Factor 4 · Growth  (max 10)</div>
+        <div class="lookup-rows">
+          <span class="k">HYPER_GROWTH</span>         <span class="v">10</span>
+          <span class="k">ACTIVE_GROWTH</span>        <span class="v">7</span>
+          <span class="k">STABLE</span>              <span class="v">4</span>
+          <span class="k">FLAT_OR_CONTRACTING</span> <span class="v">1</span>
+        </div>
+      </div>
+      <div class="lookup" style="grid-column:1 / -1">
+        <div class="lookup-title">Factor 5 · Buying Readiness  (max 10)</div>
+        <div class="lookup-rows" style="grid-template-columns:1fr auto 1fr auto;column-gap:36px">
+          <span class="k">EXPLICIT</span>         <span class="v">10</span>
+          <span class="k">STRONG_THEMES</span>   <span class="v">7</span>
+          <span class="k">ADJACENT_THEMES</span><span class="v">4</span>
+          <span class="k">NONE</span>           <span class="v">1</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Why these weights</h3>
+    <table>
+      <thead><tr><th>Factor</th><th>Max</th><th>Why this weight</th></tr></thead>
+      <tbody>
+        <tr><td>industry_fit</td><td class="num">30</td><td class="muted">If not healthcare-with-providers, nothing else matters. Highest single weight.</td></tr>
+        <tr><td>scale_signals</td><td class="num">25</td><td class="muted">Determines deal size. A 1M-life plan is worth ~100× a 10K-life plan to CertifyOS.</td></tr>
+        <tr><td>provider_network_signal</td><td class="num">25</td><td class="muted">The literal use case. Without it they're "healthcare" but not "buyer".</td></tr>
+        <tr><td>growth_maturity</td><td class="num">10</td><td class="muted">Affects urgency, not fit. Fast-growing companies feel credentialing pain harder.</td></tr>
+        <tr><td>buying_readiness</td><td class="num">10</td><td class="muted">Stated pains predict <em>when</em>, not <em>whether</em>. Useful for AE prioritization.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The copy floor - when the system <em style="font-style:italic;color:var(--accent)">doesn't</em> commit</h3>
+    <p>Below an ICP score of <strong style="color:var(--accent);font-family:var(--mono)">50</strong>, the pipeline skips two stages on purpose:</p>
+    <ul style="color:var(--text-dim);font-size:16px;line-height:1.7;margin:14px 0 18px;padding-left:22px">
+      <li>The <strong>copywriter agent</strong> doesn't run - no hero, no pain paragraph, no CTAs are generated.</li>
+      <li>The <strong>Sanity write</strong> is skipped entirely - no document is created in the CMS.</li>
+    </ul>
+    <p>The ICP score, tier, breakdown, and reasoning still land on the <strong>HubSpot record</strong> - an AE needs that data to make a "don't pursue" call. But the marketer-facing surface (Sanity Studio, the rendered landing page) stays clean. Only accounts the system can credibly personalize show up there.</p>
+
+    <div class="compare" style="margin-top:18px">
+      <div>
+        <h4 style="color:var(--accent)">Score ≥ 50 (Tier A, B, high-C)</h4>
+        <div style="font-family:var(--mono);color:var(--text-dim);font-size:13px;line-height:1.7">
+          ✓ Extractor agent<br>
+          ✓ Classifier agent<br>
+          ✓ <strong style="color:var(--accent)">Copywriter agent</strong><br>
+          ✓ <strong style="color:var(--accent)">Sanity write</strong><br>
+          ✓ HubSpot write<br>
+          ✓ Renders at /p/{slug}
+        </div>
+      </div>
+      <div>
+        <h4 style="color:var(--rust)">Score &lt; 50 (Tier D, low-C)</h4>
+        <div style="font-family:var(--mono);color:var(--text-dim);font-size:13px;line-height:1.7">
+          ✓ Extractor agent<br>
+          ✓ Classifier agent<br>
+          <span style="color:var(--rust)">✗ Copywriter - skipped</span><br>
+          <span style="color:var(--rust)">✗ Sanity - skipped</span><br>
+          ✓ HubSpot write (ICP only)<br>
+          <span style="color:var(--rust)">✗ No /p/{slug} page</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:14px;color:var(--text-dim);font-size:14px">Why: a personalized landing page for a misfit is worse than no page. It pollutes the marketer queue, mocks the prospect, and wastes LLM budget. The system saying nothing is the system being honest.</p>
+
+    <h3>Intent themes &amp; pain points - what they're for</h3>
+    <p>The classifier returns two enriched lists alongside the 5 factor classifications: <strong>intent themes</strong> (3–6 areas of inferred buyer interest) and <strong>pain points</strong> (2–5 problems with evidence quoted from the source content). Each item carries its own 0–100 confidence.</p>
+    <p>Critical anchoring rule baked into the prompt: these MUST be about <em style="color:var(--accent);font-style:italic">CertifyOS's product space</em> - credentialing, licensing, provider enrollment, network management, provider data infrastructure. Not the prospect's own marketing themes. Not the pains the prospect solves for their customers.</p>
+
+    <div class="compare">
+      <div>
+        <h4 style="color:var(--accent)">✓ Correct intent theme</h4>
+        <div style="font-family:var(--mono);color:var(--text);font-size:13px;line-height:1.7">
+          "Multi-state provider licensing automation"<br>
+          "Credentialing for a growing therapist network"<br>
+          "Network adequacy reporting for CMS compliance"
+        </div>
+        <p style="color:var(--text-dim);font-size:13px;margin-top:14px">These are things the prospect might <strong>buy from CertifyOS</strong>.</p>
+      </div>
+      <div>
+        <h4 style="color:var(--rust)">✗ Wrong intent theme</h4>
+        <div style="font-family:var(--mono);color:var(--text);font-size:13px;line-height:1.7">
+          "Patient intake automation" <span style="color:var(--text-muted)">← Phreesia's product</span><br>
+          "Consumer prescription savings" <span style="color:var(--text-muted)">← GoodRx's product</span><br>
+          "Meditation and wellness" <span style="color:var(--text-muted)">← Calm's product</span>
+        </div>
+        <p style="color:var(--text-dim);font-size:13px;margin-top:14px">These are the prospect's own marketing themes - useless to the CertifyOS AE.</p>
+      </div>
+    </div>
+
+    <p>When a prospect has no plausible CertifyOS-relevant intent or pain (industry = NOT_HEALTHCARE, network_type = NONE/TANGENTIAL), the classifier is instructed to <strong>return empty arrays</strong>. Empty is correct. Fabricating themes for a consumer brand is worse than silence - it pollutes the AE's signal.</p>
+
+    <h3>Tier mapping</h3>
+    <table>
+      <thead><tr><th>Range</th><th>Tier</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="num">90–100</td><td><span class="tier tier-A">TIER A</span></td><td class="muted">Elite fit - health plan with 100K+ lives, or digital health where the provider network is the core asset.</td></tr>
+        <tr><td class="num">70–89</td><td><span class="tier tier-B">TIER B</span></td><td class="muted">Strong fit, likely buyer with one weaker dimension.</td></tr>
+        <tr><td class="num">40–69</td><td><span class="tier tier-C">TIER C</span></td><td class="muted">Adjacent - could use credentialing data but it's not the core problem.</td></tr>
+        <tr><td class="num">0–39</td><td><span class="tier tier-D">TIER D</span></td><td class="muted">Misfit - not healthcare, or healthcare without provider needs.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Confidence model</h3>
+    <p>Two layers, deliberately distinct:</p>
+    <div class="compare">
+      <div>
+        <h4>data_confidence</h4>
+        <div class="pull">how complete is the scrape?</div>
+        <p style="color:var(--text-dim);font-size:14px">Three buckets - high / medium / low - driven by how many pages came back substantive. Propagates through every stage and lands on the HubSpot record so AEs see it.</p>
+      </div>
+      <div>
+        <h4>score_confidence</h4>
+        <div class="pull">how sure are we of the number itself?</div>
+        <p style="color:var(--text-dim);font-size:14px">Continuous 0–100. Computed as a weighted average of the five signal-level confidences (weights mirror the factor caps). A high score with low confidence is a "look closer" flag, not a green light.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 04 - Worked example -->
+<section id="example">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">04 · WORKED EXAMPLE</div>
+      <h2 class="section-title">OncoHealth, scored.</h2>
+    </div>
+    <p class="section-lede">A real run on oncohealth.us. The classifier picked five enums; the formula did the arithmetic.</p>
+
+    <p><strong>Signals:</strong> <code class="inline">industry=DIGITAL_HEALTH_CLINICAL</code> · <code class="inline">scale=OVER_1M + enterprise customers</code> · <code class="inline">network=RUNS_MULTI_STATE_NETWORK</code> · <code class="inline">growth=ACTIVE_GROWTH</code> · <code class="inline">readiness=ADJACENT_THEMES</code></p>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:32px;margin:24px 0">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px">
+        <div>
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--text-muted)">ONCOHEALTH.US</div>
+          <div style="font-family:var(--serif);font-size:80px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;margin-top:4px">85</div>
+        </div>
+        <div style="text-align:right">
+          <span class="tier tier-B">TIER B</span>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text-muted);margin-top:8px">score_confidence: 82%</div>
+        </div>
+      </div>
+
+      <div class="bar-row">
+        <div class="label">industry_fit</div>
+        <div class="bar-track"><div class="bar-fill" style="width:83%"></div></div>
+        <div class="val">25 / 30</div>
+      </div>
+      <div class="bar-row">
+        <div class="label">scale_signals</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        <div class="val">25 / 25</div>
+      </div>
+      <div class="bar-row">
+        <div class="label">provider_network</div>
+        <div class="bar-track"><div class="bar-fill" style="width:96%"></div></div>
+        <div class="val">24 / 25</div>
+      </div>
+      <div class="bar-row">
+        <div class="label">growth_maturity</div>
+        <div class="bar-track"><div class="bar-fill warn" style="width:70%"></div></div>
+        <div class="val">7 / 10</div>
+      </div>
+      <div class="bar-row">
+        <div class="label">buying_readiness</div>
+        <div class="bar-track"><div class="bar-fill warn" style="width:40%"></div></div>
+        <div class="val">4 / 10</div>
+      </div>
+    </div>
+
+    <h3>How four contrasting shapes land on the same formula</h3>
+    <table>
+      <thead><tr><th>Company shape</th><th>industry</th><th>scale</th><th>network</th><th>growth</th><th>readiness</th><th>Total</th><th>Tier</th></tr></thead>
+      <tbody>
+        <tr><td>Big health plan (Oscar-like)</td>           <td class="num">29</td><td class="num">25</td><td class="num">24</td><td class="num">7</td><td class="num">7</td><td class="num">92</td><td><span class="tier tier-A">A</span></td></tr>
+        <tr><td>Specialty mgmt (OncoHealth-like)</td>       <td class="num">25</td><td class="num">25</td><td class="num">24</td><td class="num">7</td><td class="num">4</td><td class="num">85</td><td><span class="tier tier-B">B</span></td></tr>
+        <tr><td>Mid-market mental health (Alma-like)</td>   <td class="num">25</td><td class="num">11</td><td class="num">24</td><td class="num">7</td><td class="num">7</td><td class="num">74</td><td><span class="tier tier-B">B</span></td></tr>
+        <tr><td>EHR vendor (adjacent)</td>                   <td class="num">13</td><td class="num">20</td><td class="num">13</td><td class="num">4</td><td class="num">4</td><td class="num">54</td><td><span class="tier tier-C">C</span></td></tr>
+        <tr><td>Consumer brand (Glossier)</td>               <td class="num">2</td><td class="num">11</td><td class="num">2</td><td class="num">4</td><td class="num">1</td><td class="num">20</td><td><span class="tier tier-D">D</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 05 - Architecture -->
+<section id="arch">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">05 · ARCHITECTURE</div>
+      <h2 class="section-title">One module, one job.</h2>
+    </div>
+    <p class="section-lede">Each module is ≤200 lines. Names tell you what they own. Boundaries are enforced by what each module is allowed to import.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-num">prism/config.py</div>
+        <h3>Config</h3>
+        <p>Env loading, constants, fail-fast validation on import.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">prism/models.py</div>
+        <h3>Models</h3>
+        <p>Pydantic schemas - single source of truth. <code class="inline">ICPSignals</code>, <code class="inline">ICPAnalysis</code>, <code class="inline">ScoreBreakdown</code>, <code class="inline">CopyBlocks</code> all live here.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">prism/scraper.py</div>
+        <h3>Scraper</h3>
+        <p>Jina Reader wrapper. Three-layer URL discovery: sitemap.xml → homepage links → keyword fallback. Page role tagging.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">prism/agents.py</div>
+        <h3>Agents</h3>
+        <p>Three Claude calls - extractor, classifier, copywriter. Tool-use mode + Pydantic validation + one-shot retry on validation error.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">prism/scoring.py</div>
+        <h3>Scoring</h3>
+        <p>Deterministic 5-factor scoring. Pure Python functions, no LLM calls. <code class="inline">SCORING_VERSION</code> stamped on every record.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">prism/sanity_client.py</div>
+        <h3>Sanity client</h3>
+        <p>Content Lake HTTP API. <code class="inline">createOrReplace</code> on the analysis doc, <code class="inline">patch</code> for the HubSpot backlink.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">prism/hubspot_client.py</div>
+        <h3>HubSpot client</h3>
+        <p>Search-by-domain → upsert. Standard <code class="inline">industry</code> field is skipped (HubSpot enum mismatch); the analysis lives in 10 custom <code class="inline">prism_*</code> properties.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">prism/pipeline.py</div>
+        <h3>Pipeline</h3>
+        <p>Wiring across stages. Optional <code class="inline">--dump</code> writes a complete per-run JSON to <code class="inline">examples/runs/</code>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 - Decisions -->
+<section id="decisions">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">06 · DECISIONS</div>
+      <h2 class="section-title">Why · why · why.</h2>
+    </div>
+    <p class="section-lede">Every visible decision in this build, with the thing that was deliberately not chosen.</p>
+
+    <div class="decisions">
+      <div class="head"><div>Choice</div><div>Why</div><div>Rejected</div></div>
+      <div>
+        <div><strong>Jina Reader</strong> for scraping</div>
+        <div class="why">JS rendering + content cleaning in one call. Saves ~60 min vs Playwright on the demo and lets that time go into the analysis layer where differentiation lives.</div>
+        <div class="rej">Playwright fallback chain - over-engineered for a POC, ~85% of sites are fine with Jina.</div>
+      </div>
+      <div>
+        <div><strong>Three Claude calls</strong></div>
+        <div class="why">Each agent has one job. Outputs are inspectable, individually evaluable, and at scale individually swappable to cheaper models.</div>
+        <div class="rej">One mega-prompt - mixes concerns; agent-orchestration framework - opacity without value at three steps.</div>
+      </div>
+      <div>
+        <div><strong>Tool-use + Pydantic</strong></div>
+        <div class="why">Schema is enforced at the API layer; the response is validated into a typed class on receipt; one-shot retry-with-error feedback on validation failure.</div>
+        <div class="rej">Free-form JSON parsing - fragile and unrecoverable on a typo.</div>
+      </div>
+      <div>
+        <div><strong>Deterministic Python scoring</strong></div>
+        <div class="why">Auditable, reproducible, tunable, testable, A/B-able. Signal extraction quality and formula correctness become independent evals.</div>
+        <div class="rej">LLM-emitted scores - opaque, drifty, no clean way to A/B-test the formula.</div>
+      </div>
+      <div>
+        <div><strong>Layered URL discovery</strong></div>
+        <div class="why">Real sites use <code class="inline">/our-story</code>, <code class="inline">/why</code>, <code class="inline">/about-oncohealth</code>. A hardcoded list misses non-standard layouts.</div>
+        <div class="rej">Static path list alone - fails the "non-standard layouts" requirement.</div>
+      </div>
+      <div>
+        <div><strong>HubSpot properties</strong> (not custom objects)</div>
+        <div class="why">AEs work on the company record. Properties show in standard views and reports.</div>
+        <div class="rej">Custom objects - heavier to set up, harder for AEs to find.</div>
+      </div>
+      <div>
+        <div><strong>Python (for now)</strong></div>
+        <div class="why">Fastest path to a working pipeline. LLM tooling is Python-native.</div>
+        <div class="rej">TypeScript end-to-end would unify Sanity + Next.js with the pipeline; right move at v2.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 - Data model -->
+<section id="data">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">07 · DATA MODEL</div>
+      <h2 class="section-title">Three stores, one analysis.</h2>
+    </div>
+    <p class="section-lede">Same data, three shapes - each tuned to who reads it.</p>
+
+    <div class="grid-3">
+      <div class="card" style="border-top:2px solid var(--accent)">
+        <div class="card-num">STORE 01 · SANITY</div>
+        <h3>Full structured doc</h3>
+        <p><strong>Who reads it:</strong> marketers (in Sanity Studio) and the Next.js page renderer (via Sanity's content query API).</p>
+        <p><strong>Shape:</strong> one <code class="inline">companyAnalysis</code> document per <em>personalizable</em> company (score ≥ 50). <code class="inline">_id = companyAnalysis.&lt;slug&gt;</code>, upsert via <code class="inline">createOrReplace</code>.</p>
+        <p><strong>Contains:</strong> facts, full ICP analysis (score, tier, breakdown, signals), all copy blocks, missing-data list, scoring version.</p>
+        <p style="color:var(--text-muted);font-size:13px;margin-top:14px"><strong style="color:var(--rust)">Excludes:</strong> sub-floor accounts (score &lt; 50). Those live on HubSpot only.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--steel)">
+        <div class="card-num">STORE 02 · HUBSPOT</div>
+        <h3>AE-facing summary</h3>
+        <p><strong>Who reads it:</strong> account owners, in their daily workflow.</p>
+        <p><strong>Shape:</strong> Company record keyed by <code class="inline">domain</code>. Every analyzed account lands here - A, B, C, and D. Standard <code class="inline">industry</code> field is skipped. 10 custom <code class="inline">prism_*</code> properties.</p>
+        <p><strong>Contains:</strong> the score, the tier, the reasoning, intent themes with confidences, sanity URL bridge (empty for sub-floor accounts since there's no Sanity doc to link to).</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--plum)">
+        <div class="card-num">STORE 03 · LOCAL JSON</div>
+        <h3>Audit + replay</h3>
+        <p><strong>Who reads it:</strong> the developer, reviewers, evals.</p>
+        <p><strong>Shape:</strong> one file per run at <code class="inline">examples/runs/&lt;slug&gt;.json</code>. Written when <code class="inline">--dump</code> is passed.</p>
+        <p><strong>Contains:</strong> everything - summary, scrape, facts, icp, copy. Use to share results without API access.</p>
+      </div>
+    </div>
+
+    <h3>The 10 HubSpot custom properties</h3>
+    <table>
+      <thead><tr><th>Property</th><th>Type</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td class="code">prism_icp_score</td>           <td>number</td>   <td class="muted">deterministic sum</td></tr>
+        <tr><td class="code">prism_icp_tier</td>            <td>string</td>   <td class="muted">A / B / C / D</td></tr>
+        <tr><td class="code">prism_icp_reasoning</td>       <td>textarea</td> <td class="muted">composed from factor rationales</td></tr>
+        <tr><td class="code">prism_score_confidence</td>    <td>number</td>   <td class="muted">weighted avg of signal confidences</td></tr>
+        <tr><td class="code">prism_score_breakdown</td>     <td>textarea</td> <td class="muted">five-factor expanded view</td></tr>
+        <tr><td class="code">prism_intent_themes</td>       <td>textarea</td> <td class="muted">"theme (78%), theme (72%), …"</td></tr>
+        <tr><td class="code">prism_one_line</td>            <td>string</td>   <td class="muted">elevator pitch from facts</td></tr>
+        <tr><td class="code">prism_data_confidence</td>     <td>string</td>   <td class="muted">scrape completeness flag</td></tr>
+        <tr><td class="code">prism_sanity_url</td>          <td>string</td>   <td class="muted">→ Sanity Studio doc</td></tr>
+        <tr><td class="code">prism_scoring_version</td>     <td>string</td>   <td class="muted">SCORING_VERSION constant</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:18px"><code class="inline">python scripts/bootstrap_hubspot.py</code> creates all ten in one shot - idempotent.</p>
+
+    <h3>The Sanity Studio (marketer surface)</h3>
+    <p>The schema is shaped to make the Studio usable by a marketer, not a developer. Four design choices:</p>
+
+    <div class="grid-2" style="margin-top:18px">
+      <div class="card">
+        <div class="card-num">01 · TIER-BASED DESK</div>
+        <h3>Sidebar grouped by ICP tier</h3>
+        <p>Custom <code class="inline">structureTool</code> exposes "By ICP Tier" folders - 🟢 A, 🟡 B, 🟣 C, 🔴 D - each pre-filtered and sorted by score desc. A marketer can ignore D-tier entirely and focus only on accounts worth personalizing.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">02 · FIELD GROUPS (TABS)</div>
+        <h3>Document split into 5 tabs</h3>
+        <p>Identity · ICP Scoring · Intent &amp; Pain · Page Content · Metadata. A long document becomes navigable. The marketer lives in <em>Page Content</em>; everything else is reference.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">03 · READ-ONLY MACHINE OUTPUT</div>
+        <h3>Marketers can only edit copy</h3>
+        <p>Score, tier, breakdown, signals, metadata are all <code class="inline">readOnly: true</code>. Only <code class="inline">heroHeadline</code>, <code class="inline">subheadline</code>, <code class="inline">valueProp</code>, <code class="inline">painParagraph</code>, and CTAs are editable - exactly the surface a marketer should touch.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">04 · RICH LIST PREVIEW</div>
+        <h3>Every row shows tier + score + confidence</h3>
+        <p>The sidebar entry for each company displays a colored dot, tier letter, score/100, confidence%, and data-confidence flag at a glance. No need to open the doc to triage.</p>
+      </div>
+    </div>
+
+<pre class="ascii" style="margin-top:24px">
+  ┌─ Prism ──────────────────────────────────────────────┐
+  │ ▸ By ICP Tier                                        │
+  │     🟢  Tier A - Elite Fit       <span class="hl">Devoted (93)</span>          │
+  │     🟡  Tier B - Strong Fit      <span class="am">Headway (79)</span>          │
+  │     🟣  Tier C - Adjacent                            │
+  │     🔴  Tier D - Misfit          <span class="ru">Phreesia, GoodRx,</span>     │
+  │                                  <span class="ru">Glossier</span>              │
+  │ ─────────────                                        │
+  │ ▸ All Companies (ranked)                             │
+  │ ▸ Needs review (low data conf)   <span class="dim">auto-triage queue</span>    │
+  └──────────────────────────────────────────────────────┘
+</pre>
+
+    <p style="margin-top:18px;color:var(--text-dim);font-size:14px">When a marketer publishes from this Studio, Sanity fires a webhook → our Next.js endpoint refreshes the page's cache → the live URL at <code class="inline">/p/{slug}</code> shows the new content within seconds. The renderer that does this is built - see section 11.</p>
+  </div>
+</section>
+
+<!-- 08 - Failure -->
+<section id="failure">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">08 · FAILURE</div>
+      <h2 class="section-title">What breaks first under load.</h2>
+    </div>
+    <p class="section-lede">Three failure modes in the order they bite. Each one already has a partial mitigation in the code; full hardening is the v2 work.</p>
+
+    <div class="fail">
+      <div class="rank">↑ MOST LIKELY · #1</div>
+      <h4>Prompt drift on Claude version bumps</h4>
+      <div class="mit">A model update introduces newly-verbose responses or shifts a tool-input field type. The pipeline silently parses fewer fields. <strong>Mitigation:</strong> eval harness in CI on every prompt change; pinned model versions; the retry-with-error-feedback in <code class="inline">agents._call_claude_structured</code>.</div>
+    </div>
+    <div class="fail">
+      <div class="rank">#2</div>
+      <h4>HubSpot search rate limits</h4>
+      <div class="mit">The <code class="inline">_find_company_by_domain</code> search call is the first endpoint to throttle on a batch run. <strong>Mitigation:</strong> semaphore + exponential backoff; pre-load existing domains at batch start; the search is already wrapped in a broad exception handler that degrades to "no match" rather than crash.</div>
+    </div>
+    <div class="fail">
+      <div class="rank">#3</div>
+      <h4>Jina rate limits + aggressive anti-bot sites</h4>
+      <div class="mit">Free Jina tier rate-limits at ~20 RPM. Some sites Jina cannot crack (Cloudflare-protected, login walls). <strong>Mitigation:</strong> confidence-flag downgrade propagates to HubSpot; pipeline aborts before any LLM call if 0 pages succeed; self-hosted Browserless covers the long tail at scale.</div>
+    </div>
+
+    <h3 style="margin-top:48px">Three layers of degradation in the scraper</h3>
+<pre class="ascii">
+   per-page failure  ──▶  one 403 doesn't kill the run
+        │
+        ▼
+   confidence flag   ──▶  <span class="hl">high</span> (≥3 pages) / <span class="am">medium</span> (1–2) / <span class="ru">low</span> (0)
+        │                 propagates ALL the way to HubSpot AE view
+        ▼
+   hard abort        ──▶  0 pages → return before LLM call
+                          (no slop generation on blocked sites)
+</pre>
+  </div>
+</section>
+
+<!-- 09 - Scale -->
+<section id="scale">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">09 · SCALE</div>
+      <h2 class="section-title">Today · 1K/mo · 10K/mo.</h2>
+    </div>
+    <p class="section-lede">What ships when, and what it costs.</p>
+
+    <table>
+      <thead><tr><th>Concern</th><th>Today</th><th>at 1K / month</th><th>at 10K / month</th></tr></thead>
+      <tbody>
+        <tr><td>Execution</td><td class="muted">Sequential CLI</td><td class="muted">Queue + worker pool (SQS / BullMQ)</td><td class="muted">Same + region-aware sharding</td></tr>
+        <tr><td>Concurrency</td><td class="muted">No locking</td><td class="muted">Per-domain lock at upsert</td><td class="muted">Same</td></tr>
+        <tr><td>Caching</td><td class="muted">None</td><td class="muted">7-day scrape cache by domain</td><td class="muted">+ prompt-version-keyed LLM cache</td></tr>
+        <tr><td>Model tiering</td><td class="muted">Sonnet on all 3 agents</td><td class="muted">Same</td><td class="muted">Haiku on extractor; Sonnet on classifier + copy</td></tr>
+        <tr><td>Cost (LLM only)</td><td class="num">~$0.05/co</td><td class="num">~$15/mo</td><td class="num">~$80/mo</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 10 - Signal layer -->
+<section id="signals">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">10 · SIGNAL LAYER</div>
+      <h2 class="section-title">Scrape today. <em style="font-style:italic;color:var(--accent)">Gong + SFDC tomorrow.</em></h2>
+    </div>
+    <p class="section-lede">Scrape data tells you what a company says publicly. It doesn't tell you what's happening now in their buying process, or what their salespeople are actually hearing.</p>
+
+<pre class="ascii">
+   today                          tomorrow
+   ─────                          ────────
+   scrape only                    scrape  ──┐
+   = "what they say               Gong    ──┼──▶  <span class="hl">account_signals</span>
+      publicly"                   SFDC    ──┘     (Postgres / DuckDB,
+                                                   keyed: domain)
+                                                        │
+                                                        ▼
+                                                  ICP <em>classifier</em> becomes
+                                                  multi-source synthesizer
+</pre>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="card">
+        <div class="card-num">SOURCE · GONG</div>
+        <h3>Transcript-derived intent</h3>
+        <p>Highest signal-to-effort ratio. Run a classifier pass on Gong call transcripts for competitor mentions, stated pains, timelines, decision criteria.</p>
+        <div class="pull" style="font-size:22px">"Credentialing pain mentioned 3× on a call" beats 50 website scrapes.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">SOURCE · SALESFORCE</div>
+        <h3>Behavioral lift</h3>
+        <p>Email opens, clicks, meeting density, contact role spread, opp-stage transitions. Behavior, not intent - adds a behavioral component on top of the ICP score.</p>
+        <p style="color:var(--text-dim);font-size:14px;margin-top:14px">Result: quiet Tier A often loses to engaged Tier B.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:24px"><strong>Build order:</strong> Gong first. The classifier model already has a structured-extraction shape; pointing it at transcripts is a small change. SFDC behavioral signals are mechanical aggregations on top.</p>
+  </div>
+</section>
+
+<!-- 11 - Sanity → render -->
+<section id="render">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">11 · RENDER</div>
+      <h2 class="section-title">From Sanity to live page in seconds.</h2>
+    </div>
+    <p class="section-lede">Marketer edits in Studio. Webhook on publish. Next.js ISR. Live URL.</p>
+
+<pre class="ascii">
+                                   webhook on publish
+   ┌───────────────┐                        ▼
+   │ Sanity Studio │ ───▶ doc publish ───▶  Next.js endpoint
+   └───────────────┘                        │
+        marketer                            │ cache refresh on publish
+        edits copy                          ▼
+        previews live                ┌─────────────────┐
+        clicks publish               │  /p/oscar-com   │
+                                     │  /p/devoted-com │
+                                     │  /p/{slug}      │
+                                     └─────────────────┘
+                                       reads from Sanity
+                                       UTM-aware analytics
+                                       → engagement signal
+                                         feeds back into
+                                         <span class="hl">ICP classifier</span>
+</pre>
+
+    <p>The Sanity schema is already shaped for A/B variants - extend <code class="inline">personalizedPage</code> with experiment IDs. Not built in v1; ~3–4 hours of work on the Next.js side plus webhook config.</p>
+  </div>
+</section>
+
+<!-- 12 - Measurement -->
+<section id="measure">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">12 · MEASUREMENT</div>
+      <h2 class="section-title">Four layers. The bottom one matters.</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-num">LAYER 01</div>
+        <h3>System health</h3>
+        <p>Scrape success rate · LLM parse success rate · write success rate · latency p50/p95 · cost per company. Fix these before measuring anything else; cost per company is what catches regressions before the bill does.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">LAYER 02</div>
+        <h3>Content quality (proxy)</h3>
+        <p>5% sample for manual review against an anti-fluff rubric. LLM-as-judge to scale. Track the trend across prompt changes - never measure a prompt diff in isolation.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">LAYER 03</div>
+        <h3>Pipeline impact (causal)</h3>
+        <p>Holdout A/B. Inbound - 50% personalized vs 50% generic, measure demo-book conversion. Outbound - prism copy vs templated, measure reply rate and meeting rate. Holdout is non-negotiable.</p>
+      </div>
+      <div class="card" style="border:1px solid var(--accent)">
+        <div class="card-num" style="color:var(--accent)">LAYER 04 · THE ONLY ONE</div>
+        <h3>Revenue</h3>
+        <p>Closed-won attributable to prism-analyzed accounts vs not. 90-day rolling win rate by ICP tier - does the scorer actually predict win rate? If A doesn't beat C, the classifier is decorative and should be ripped out.</p>
+      </div>
+    </div>
+
+    <div class="pull" style="margin-top:48px;font-size:36px;max-width:36ch">"Are AEs <em style="font-style:italic;color:var(--accent)">opening the Sanity doc</em> before their first call?" That's the gut metric.</div>
+    <p style="color:var(--text-dim)">High open rate + better win rate → the system works. Ignored → it's producing slop dressed up as intelligence, and that's worse than no system at all.</p>
+  </div>
+</section>
+
+<!-- 13 - Repo -->
+<section id="repo">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-num">13 · REPO MAP</div>
+      <h2 class="section-title">Where things live.</h2>
+    </div>
+
+<pre class="ascii">
+   prism/
+   ├─ README.md                  whiteboard overview
+   ├─ SETUP.md                   provisioning (keys, props, schema)
+   ├─ CLAUDE.md                  module boundaries + conventions
+   ├─ pyproject.toml / requirements.txt
+   ├─ .env.example
+   ├─ run.py                     typer CLI entrypoint
+   │
+   ├─ prism/
+   │   ├─ <span class="hl">models.py</span>             Pydantic - single source of truth
+   │   ├─ <span class="hl">scraper.py</span>            Jina + sitemap/link discovery
+   │   ├─ <span class="hl">agents.py</span>             3 Claude calls + retry + tool-use
+   │   ├─ <span class="hl">scoring.py</span>            deterministic 5-factor scoring
+   │   ├─ <span class="hl">sanity_client.py</span>      Sanity HTTP API
+   │   ├─ <span class="hl">hubspot_client.py</span>     HubSpot SDK
+   │   ├─ <span class="hl">pipeline.py</span>           orchestrator + dump
+   │   └─ <span class="hl">config.py</span>             env + constants
+   │
+   ├─ sanity/schemaTypes/        drop into your Studio
+   ├─ scripts/bootstrap_hubspot.py   idempotent property setup
+   ├─ evals/README.md            eval harness design (sketch)
+   ├─ examples/runs/             JSON snapshots of real runs
+   └─ docs/index.html            <span class="am">← you are here</span>
+</pre>
+
+    <h3>Quickstart</h3>
+<pre>
+git clone &lt;repo&gt; &amp;&amp; cd prism
+cp .env.example .env                   <span class="dim"># fill in keys</span>
+python -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -e .
+
+python scripts/bootstrap_hubspot.py    <span class="dim"># creates 10 custom props</span>
+<span class="dim"># deploy sanity/schemaTypes/* in your Studio</span>
+
+python run.py analyze https://www.hioscar.com --dump examples/runs
+python run.py analyze https://www.glossier.com --dump examples/runs
+</pre>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">
+    <div class="mono">PRISM · CertifyOS GTM Engineer take-home</div>
+    <div style="margin-top:6px">Python · Claude Sonnet 4 · Jina Reader · Sanity · HubSpot</div>
+  </div>
+</footer>
+
+</body>
+</html>
