@@ -208,7 +208,7 @@ footer .mono{color:var(--text-dim)}
     <div><dt>Pipeline shape</dt><dd>scrape → 3 Claude agents → write</dd></div>
     <div><dt>LLM</dt><dd>Claude Sonnet 4 (tool-use)</dd></div>
     <div><dt>Scoring</dt><dd>Deterministic Python</dd></div>
-    <div><dt>Stack</dt><dd>Python · httpx · Pydantic</dd></div>
+    <div><dt>Stack</dt><dd>Python · TypeScript · Next.js · Sanity</dd></div>
   </dl>
 </header>
 
@@ -832,12 +832,21 @@ footer .mono{color:var(--text-dim)}
       <thead><tr><th>Concern</th><th>Today</th><th>at 1K / month</th><th>at 10K / month</th></tr></thead>
       <tbody>
         <tr><td>Execution</td><td class="muted">Sequential CLI</td><td class="muted">Queue + worker pool (SQS / BullMQ)</td><td class="muted">Same + region-aware sharding</td></tr>
+        <tr><td>Scraper fetch</td><td class="muted">Serial Jina calls (10 pages, one at a time)</td><td class="muted"><strong style="color:var(--accent)">asyncio.gather + per-host semaphore</strong> (~5x faster on JS-heavy sites)</td><td class="muted">Same + per-tenant Jina pool</td></tr>
         <tr><td>Concurrency</td><td class="muted">No locking</td><td class="muted">Per-domain lock at upsert</td><td class="muted">Same</td></tr>
         <tr><td>Caching</td><td class="muted">None</td><td class="muted">7-day scrape cache by domain</td><td class="muted">+ prompt-version-keyed LLM cache</td></tr>
         <tr><td>Model tiering</td><td class="muted">Sonnet on all 3 agents</td><td class="muted">Same</td><td class="muted">Haiku on extractor; Sonnet on classifier + copy</td></tr>
         <tr><td>Cost (LLM only)</td><td class="num">~$0.05/co</td><td class="num">~$15/mo</td><td class="num">~$80/mo</td></tr>
       </tbody>
     </table>
+
+    <div class="card" style="margin-top:32px;border-left:3px solid var(--accent)">
+      <div class="card-num">SHIP-IT-FIRST · Parallelize Jina</div>
+      <h3>The cheapest single-shot win</h3>
+      <p>Today the scraper fetches 10 candidate URLs serially. On a slow site (OncoHealth's worst page took 26 seconds), the scraper alone burns ~2 minutes per company. <code class="inline">asyncio.gather</code> on the per-URL fetch shrinks that to the slowest single page (~25s instead of ~135s).</p>
+      <p style="color:var(--text-dim);font-size:14px;margin-top:10px"><strong>Tradeoff:</strong> a single batch of 10 concurrent calls can hit Jina's free-tier rate limit (~20 RPM) faster than the serial version. Mitigation: a <code class="inline">semaphore</code> in the scraper limiting concurrency to ~5 per host, plus exponential backoff on 429s. ~30 lines of change in <code class="inline">prism/scraper.py</code>, no architectural shift.</p>
+      <p style="color:var(--text-dim);font-size:14px"><strong>Why this lands first at v2:</strong> biggest wall-time win across every demo and every batch run. The agent stages are already fast (~50s combined); the scraper is the bottleneck.</p>
+    </div>
   </div>
 </section>
 
@@ -1003,7 +1012,7 @@ python run.py analyze https://www.glossier.com --dump examples/runs
 <footer>
   <div class="shell">
     <div class="mono">PRISM · CertifyOS GTM Engineer take-home</div>
-    <div style="margin-top:6px">Python · Claude Sonnet 4 · Jina Reader · Sanity · HubSpot</div>
+    <div style="margin-top:6px">Python · TypeScript · Next.js · Claude Sonnet 4 · Jina Reader · Sanity · HubSpot</div>
   </div>
 </footer>
 

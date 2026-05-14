@@ -27,3 +27,5 @@ build/
 *.log
 /tmp/
 /scripts/gh-flip.sh
+clean_demo.py
+examples/runs/
