@@ -422,13 +422,16 @@ footer .mono{color:var(--text-dim)}
       </tbody>
     </table>
 
-    <h3>The copy floor - when the system <em style="font-style:italic;color:var(--accent)">doesn't</em> commit</h3>
-    <p>Below an ICP score of <strong style="color:var(--accent);font-family:var(--mono)">50</strong>, the pipeline skips two stages on purpose:</p>
+    <h3>The render floor - when the system <em style="font-style:italic;color:var(--accent)">doesn't</em> commit to a page</h3>
+    <p>Every analyzed company - A, B, C, D - lands in Sanity. Sanity is the analysis-of-record. What changes is whether the system generates copy and whether the doc renders as a public page.</p>
+
+    <p>The threshold is an ICP score of <strong style="color:var(--accent);font-family:var(--mono)">50</strong>. Below it:</p>
     <ul style="color:var(--text-dim);font-size:16px;line-height:1.7;margin:14px 0 18px;padding-left:22px">
-      <li>The <strong>copywriter agent</strong> doesn't run - no hero, no pain paragraph, no CTAs are generated.</li>
-      <li>The <strong>Sanity write</strong> is skipped entirely - no document is created in the CMS.</li>
+      <li>The <strong>copywriter agent</strong> doesn't run - no hero, no pain paragraph, no CTAs.</li>
+      <li>The Sanity doc <strong>still exists</strong>, with facts + signals + breakdown + reasoning. Copy fields are empty.</li>
+      <li>The Next.js renderer <strong>404s the public URL</strong> - the doc isn't published as a page.</li>
     </ul>
-    <p>The ICP score, tier, breakdown, and reasoning still land on the <strong>HubSpot record</strong> - an AE needs that data to make a "don't pursue" call. But the marketer-facing surface (Sanity Studio, the rendered landing page) stays clean. Only accounts the system can credibly personalize show up there.</p>
+    <p>Why this split: Sanity is the analyst-facing surface (full reasoning, override-able, audit-able). The /p/{slug} route is the prospect-facing surface (only renders things worth showing). One store, two policies.</p>
 
     <div class="compare" style="margin-top:18px">
       <div>
@@ -437,9 +440,9 @@ footer .mono{color:var(--text-dim)}
           ✓ Extractor agent<br>
           ✓ Classifier agent<br>
           ✓ <strong style="color:var(--accent)">Copywriter agent</strong><br>
-          ✓ <strong style="color:var(--accent)">Sanity write</strong><br>
-          ✓ HubSpot write<br>
-          ✓ Renders at /p/{slug}
+          ✓ Sanity doc (facts + signals + copy)<br>
+          ✓ HubSpot record<br>
+          ✓ <strong style="color:var(--accent)">Renders at /p/{slug}</strong>
         </div>
       </div>
       <div>
@@ -448,14 +451,14 @@ footer .mono{color:var(--text-dim)}
           ✓ Extractor agent<br>
           ✓ Classifier agent<br>
           <span style="color:var(--rust)">✗ Copywriter - skipped</span><br>
-          <span style="color:var(--rust)">✗ Sanity - skipped</span><br>
-          ✓ HubSpot write (ICP only)<br>
-          <span style="color:var(--rust)">✗ No /p/{slug} page</span>
+          ✓ Sanity doc (facts + signals, no copy)<br>
+          ✓ HubSpot record<br>
+          <span style="color:var(--rust)">✗ /p/{slug} returns 404</span>
         </div>
       </div>
     </div>
 
-    <p style="margin-top:14px;color:var(--text-dim);font-size:14px">Why: a personalized landing page for a misfit is worse than no page. It pollutes the marketer queue, mocks the prospect, and wastes LLM budget. The system saying nothing is the system being honest.</p>
+    <p style="margin-top:14px;color:var(--text-dim);font-size:14px">Why keep sub-floor docs in Sanity at all? Because the analysis itself is valuable for AEs reviewing rejections, for marketers spot-checking the system's calls, and for the override flow when someone wants to manually push a D to publishable. The render floor decides what's <em>public</em>, not what's <em>stored</em>.</p>
 
     <h3>Intent themes &amp; pain points - what they're for</h3>
     <p>The classifier returns two enriched lists alongside the 5 factor classifications: <strong>intent themes</strong> (3–6 areas of inferred buyer interest) and <strong>pain points</strong> (2–5 problems with evidence quoted from the source content). Each item carries its own 0–100 confidence.</p>
@@ -693,18 +696,18 @@ footer .mono{color:var(--text-dim)}
     <div class="grid-3">
       <div class="card" style="border-top:2px solid var(--accent)">
         <div class="card-num">STORE 01 · SANITY</div>
-        <h3>Full structured doc</h3>
-        <p><strong>Who reads it:</strong> marketers (in Sanity Studio) and the Next.js page renderer (via Sanity's content query API).</p>
-        <p><strong>Shape:</strong> one <code class="inline">companyAnalysis</code> document per <em>personalizable</em> company (score ≥ 50). <code class="inline">_id = companyAnalysis.&lt;slug&gt;</code>, upsert via <code class="inline">createOrReplace</code>.</p>
-        <p><strong>Contains:</strong> facts, full ICP analysis (score, tier, breakdown, signals), all copy blocks, missing-data list, scoring version.</p>
-        <p style="color:var(--text-muted);font-size:13px;margin-top:14px"><strong style="color:var(--rust)">Excludes:</strong> sub-floor accounts (score &lt; 50). Those live on HubSpot only.</p>
+        <h3>Analysis-of-record</h3>
+        <p><strong>Who reads it:</strong> marketers (in Sanity Studio), AEs reviewing rejections, the Next.js page renderer.</p>
+        <p><strong>Shape:</strong> one <code class="inline">companyAnalysis</code> document per company - <em>every</em> analyzed account, all tiers. <code class="inline">_id = companyAnalysis.&lt;slug&gt;</code>, upsert via <code class="inline">createOrReplace</code>.</p>
+        <p><strong>Contains:</strong> facts, full ICP analysis (score, tier, breakdown, signals), missing-data list, scoring version. Copy blocks present only when score ≥ 50.</p>
+        <p style="color:var(--text-muted);font-size:13px;margin-top:14px"><strong style="color:var(--accent)">Studio surfaces:</strong> tier folders, plus dedicated "Public pages" (score ≥ 50) and "Below threshold" (score &lt; 50) views.</p>
       </div>
       <div class="card" style="border-top:2px solid var(--steel)">
         <div class="card-num">STORE 02 · HUBSPOT</div>
         <h3>AE-facing summary</h3>
         <p><strong>Who reads it:</strong> account owners, in their daily workflow.</p>
         <p><strong>Shape:</strong> Company record keyed by <code class="inline">domain</code>. Every analyzed account lands here - A, B, C, and D. Standard <code class="inline">industry</code> field is skipped. 10 custom <code class="inline">prism_*</code> properties.</p>
-        <p><strong>Contains:</strong> the score, the tier, the reasoning, intent themes with confidences, sanity URL bridge (empty for sub-floor accounts since there's no Sanity doc to link to).</p>
+        <p><strong>Contains:</strong> the score, the tier, the reasoning, intent themes with confidences, plus <code class="inline">prism_sanity_url</code> linking to the full analysis in Sanity (every record has one now, since every analysis is in Sanity).</p>
       </div>
       <div class="card" style="border-top:2px solid var(--plum)">
         <div class="card-num">STORE 03 · LOCAL JSON</div>

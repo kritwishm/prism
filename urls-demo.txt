@@ -1,17 +1,27 @@
-# Loom demo lineup — one per tier
+# Loom demo lineup — tier labels reflect actual scoring on the last run.
+# Re-running may shift borderline cases (classifier non-determinism on edge enums).
 # Run with: python run.py batch urls-demo.txt --dump examples/runs
 
-# Tier A — textbook health-plan ICP
+# Tier A · 90 — textbook health-plan ICP, 29-state Medicare Advantage
 https://www.devoted.com
 
-# Tier B — digital health with explicit credentialing pain
+# Tier B · 79 — digital health, marketing literally says "credentialing for providers"
 https://headway.co
 
-# Tier C — healthcare but patient-side, not provider-side
+# Tier B · 76 — specialty management, 50-state oncology virtual medical group
+https://oncohealth.us
+
+# Tier B · 76 — mid-market mental health, multi-state therapist network
+https://helloalma.com
+
+# Tier D · 33 — healthcare-adjacent but providers are USERS, not their own network
 https://www.phreesia.com
 
-# Tier D — healthcare brand, no provider network
+# Tier D · 33 — healthcare-adjacent but sells to PAYERS, not provider-facing
+https://coherehealth.com
+
+# Tier D · 19 — Rx discount cards, no provider network of any kind
 https://www.goodrx.com
 
-# Tier D — extreme misfit, consumer brand sanity check
+# Tier D · 19 — consumer brand, extreme misfit (sanity check)
 https://www.glossier.com

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getAnalysisBySlug, type CompanyAnalysis } from "@/lib/sanity";
+import { getAnalysisBySlug, RENDER_SCORE_FLOOR, type CompanyAnalysis } from "@/lib/sanity";
 
 export const revalidate = 60;
 
@@ -21,6 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PersonalizedPage({ params }: Props) {
   const co = await getAnalysisBySlug(params.slug);
   if (!co) notFound();
+  // Doc exists but the score is below the render floor — the analysis is
+  // kept in Sanity for AE/marketer reference, but no public page is rendered.
+  if ((co.icpScore ?? 0) < RENDER_SCORE_FLOOR) notFound();
 
   const primary = co.ctaPrimary || { text: "Book a demo", intent: "demo" };
   const secondary = co.ctaSecondary || { text: "Talk to our team", intent: "contact" };

@@ -1,10 +1,16 @@
 {
   "summary": {
+    "success": true,
     "domain": "oncohealth.us",
-    "icp_score": 85,
-    "icp_tier": "B"
+    "company_name": "OncoHealth",
+    "icp_score": 76,
+    "icp_tier": "B",
+    "hubspot_id": "322678858465",
+    "sanity_url": "https://3vikhu00.sanity.studio/desk/companyAnalysis;companyAnalysis.oncohealth.us",
+    "data_confidence": "high"
   },
   "scrape": {
+    "domain": "oncohealth.us",
     "pages_attempted": 10,
     "pages_succeeded": 10,
     "confidence": "high",
@@ -23,166 +29,136 @@
   },
   "facts": {
     "company_name": "OncoHealth",
-    "one_line_description": "Provides oncology management software and services to help health plans and employers deliver better cancer care while reducing costs",
+    "one_line_description": "Provides integrated oncology management solutions combining utilization management, supportive care, and data analytics for health plans and employers.",
     "industry": "Healthcare Technology",
-    "sub_vertical": "Oncology Care Management",
+    "sub_vertical": "Oncology Management & Care Coordination",
     "products_services": [
-      "Oncology Management",
-      "Oncology Supportive Care",
+      "Oncology Management (utilization management, prior authorization, clinical pathways)",
+      "Oncology Supportive Care (24/7 oncology nursing, mental health, nutrition, resource navigation via Iris platform)",
       "Oncology Data & Analytics",
-      "Utilization management",
-      "24/7 oncology nursing",
-      "Mental health support",
-      "Nutrition services",
-      "Resource navigation",
-      "Iris by OncoHealth (cancer support program)",
-      "Provider portal platform"
+      "50-state virtual medical group for oncology"
     ],
     "buyer_personas": [
       "Health plan executives",
-      "Employer benefits leaders",
-      "Oncology network leaders"
+      "Employer benefit managers",
+      "Oncology network providers"
     ],
     "stated_value_props": [
-      "Delivers measurable savings without compromising care",
-      "Purpose-built oncology platform that eliminates administrative friction",
-      "Proactive, whole-person guidance at every step",
+      "Oncology expertise with multidisciplinary specialists",
+      "Purpose-built oncology platform that delivers measurable savings without compromising care",
+      "Proactive member engagement with whole-person supportive care",
       "Collaborative, data-driven provider relationships",
-      "Industry's first integrated oncology management solution",
-      "Powered by nation's first oncology focused 50-state virtual medical group",
-      "Reduces physical, mental, and financial toll of cancer"
+      "Reduced physical, mental, and financial toll of cancer",
+      "Industry's first integrated oncology management solution"
     ],
     "customer_segments": [
       "Health plans",
       "Employers",
-      "Oncology providers"
+      "Oncologists"
     ],
     "recent_themes": [
       "Financial toxicity in cancer care",
       "Supportive care as core oncology infrastructure",
-      "Integrated mental health and behavioral health services",
-      "Addressing unmet patient needs",
-      "2026 pivotal drug approvals",
-      "Prior authorization approaches in oncology"
+      "Mental health integration in oncology",
+      "Unmet needs in cancer patient support (73% without mental health access, 66% without nurse line, 65% without nutritional support)",
+      "2026 pivotal drug approvals"
     ],
-    "tone_signals": "Professional, empathetic, expert-driven, patient-centric, evidence-based, collaborative with emphasis on measurable outcomes and clinical expertise",
+    "tone_signals": "Professional, clinical, compassionate, patient-centric. Core values emphasize \"patient first,\" \"customer delight,\" \"innovation focus,\" and \"clinical excellence.\" Mission-driven language focused on reducing burden of cancer.",
     "social_proof": [
-      "22 Health Plan Partners",
-      "15M Members Supported",
-      "4K Employer Partners",
-      "$240M Delivered in Customer Savings in 2024",
-      "94% Provider Satisfaction",
-      "URAC Accredited 2027",
-      "NCQA certified"
+      "22 health plan partners",
+      "15 million members supported",
+      "4,000 employer partners",
+      "$240M delivered in customer savings in 2024",
+      "94% provider satisfaction",
+      "92 consumer net promoter score",
+      "URAC accredited",
+      "NCQA accredited"
     ]
   },
   "icp": {
-    "icp_score": 85,
+    "icp_score": 76,
     "icp_tier": "B",
-    "icp_reasoning": "OncoHealth operates a 50-state virtual medical group serving 15M members across 22 health plans. Strong provider network signal (94% provider satisfaction, portal platform) and scale, but oncology specialty focus is narrower than broad network credentialing needs. High buying readiness given multi-state licensing complexity.",
+    "icp_reasoning": "Total 76 \u2192 Tier B. Industry 13/30. Scale 25/25. Network 24/25. Growth 7/10. Readiness 7/10.",
     "score_breakdown": {
       "industry_fit": {
-        "score": 24,
-        "rationale": "Digital health platform serving health plans with clinical delivery (oncology care management, 24/7 nursing, virtual medical group) \u2014 strong target vertical.",
-        "confidence": 95
+        "score": 13,
+        "rationale": "[ADJACENT_HEALTHCARE] OncoHealth provides oncology management solutions including utilization management, prior authorization, clinical pathways, and care coordination for health plans and employers. While deeply healthcare-focused, they are not themselves a health plan, digital health provider delivery platform, or staffing/network operator\u2014they provide UM/care management services as a vendor to health plans.",
+        "confidence": 85
       },
       "scale_signals": {
         "score": 25,
-        "rationale": "15M members supported across 22 health plan partners and 4K employers; $240M in customer savings demonstrates enterprise-scale operations.",
-        "confidence": 98
+        "rationale": "[OVER_1M, enterprise customers] 15 million members supported, 22 health plan partners, 4,000 employer partners, $240M delivered in customer savings in 2024. Clear enterprise customer base (health plans) though specific names not mentioned.",
+        "confidence": 95
       },
       "provider_network_signal": {
         "score": 24,
-        "rationale": "Operates nation's first oncology-focused 50-state virtual medical group with 94% provider satisfaction and provider portal platform \u2014 core network operations.",
-        "confidence": 92
+        "rationale": "[RUNS_MULTI_STATE_NETWORK] Operates a '50-state virtual medical group for oncology' which indicates they run a multi-state provider network for oncology services.",
+        "confidence": 90
       },
       "growth_maturity": {
         "score": 7,
-        "rationale": "Established with 22 health plan partnerships and URAC/NCQA certifications; evidence of scale but limited hyper-growth signals in hiring or funding.",
-        "confidence": 65
+        "rationale": "[ACTIVE_GROWTH] Strong customer metrics with 22 health plan partners, 4,000 employer partners, 15M members, and $240M in customer savings in 2024. High satisfaction scores (94% provider, 92 NPS) suggest momentum. Recent themes around 2026 drug approvals indicate forward planning. No explicit funding or rapid hiring signals, but scale and metrics suggest active growth.",
+        "confidence": 75
       },
       "buying_readiness": {
-        "score": 5,
-        "rationale": "Platform messaging emphasizes eliminating administrative friction and collaborative provider relationships; no explicit credentialing/licensing pain stated.",
-        "confidence": 55
+        "score": 7,
+        "rationale": "[STRONG_THEMES] Operating a 50-state virtual medical group strongly implies multi-state provider licensing and credentialing needs. Recent themes around supportive care infrastructure, provider relationships, and scaling oncology services across 22 health plans and 50 states indicate ongoing provider operations and network management challenges.",
+        "confidence": 80
       }
     },
-    "score_confidence": 82,
+    "score_confidence": 87,
     "intent_themes": [
       {
-        "theme": "Multi-state provider licensing and credentialing automation",
-        "confidence": 88
-      },
-      {
-        "theme": "Provider network management and operational efficiency",
+        "theme": "Multi-state provider licensing for 50-state virtual oncology network",
         "confidence": 85
       },
       {
-        "theme": "Administrative friction reduction in provider workflows",
+        "theme": "Provider credentialing and enrollment for oncology specialists across health plan partnerships",
+        "confidence": 80
+      },
+      {
+        "theme": "Network management and monitoring for oncology provider relationships across 22 health plan partners",
         "confidence": 75
-      },
-      {
-        "theme": "Scalable oncology provider network expansion",
-        "confidence": 70
-      },
-      {
-        "theme": "Provider portal and data integration infrastructure",
-        "confidence": 68
-      },
-      {
-        "theme": "Compliance and accreditation maintenance across states",
-        "confidence": 72
       }
     ],
     "pain_points": [
       {
-        "pain": "Managing provider licensing and credentialing across 50 states for virtual medical group",
-        "evidence": "Stated value prop: 'Powered by nation's first oncology focused 50-state virtual medical group' \u2014 implies complex multi-state licensing burden.",
-        "confidence": 88
+        "pain": "Managing provider licensing and credentialing across 50 states for virtual oncology medical group",
+        "evidence": "Operates '50-state virtual medical group for oncology' which requires maintaining licenses and credentials for providers across all states",
+        "confidence": 85
       },
       {
-        "pain": "Administrative friction in provider-facing platform and workflows",
-        "evidence": "Value prop explicitly mentions 'Purpose-built oncology platform that eliminates administrative friction' and maintains provider portal platform.",
-        "confidence": 78
-      },
-      {
-        "pain": "Maintaining high provider satisfaction while scaling network operations",
-        "evidence": "94% provider satisfaction metric is highlighted as social proof \u2014 suggests provider experience is critical success metric they actively manage.",
-        "confidence": 72
-      },
-      {
-        "pain": "Ensuring continuous compliance for URAC and NCQA certifications across provider network",
-        "evidence": "URAC Accredited 2027 and NCQA certified status requires ongoing provider credentialing and compliance validation.",
-        "confidence": 80
-      },
-      {
-        "pain": "Scaling oncology provider network to support 22 health plan partnerships and 4K employers",
-        "evidence": "22 Health Plan Partners and 15M Members Supported indicates need for efficient provider onboarding and network growth infrastructure.",
+        "pain": "Scaling provider network operations while maintaining 94% provider satisfaction across expanding health plan partnerships",
+        "evidence": "22 health plan partners with 15M members and 94% provider satisfaction suggests need for efficient provider operations at scale",
         "confidence": 75
+      },
+      {
+        "pain": "Provider enrollment and network adequacy management across multiple health plan contracts",
+        "evidence": "Serving 22 health plan partners requires managing provider enrollment and ensuring adequate oncology network coverage for each plan's requirements",
+        "confidence": 70
       }
     ],
     "missing_data": [
-      "Recent funding rounds or growth capital events",
-      "Current hiring velocity in provider operations or network management roles",
-      "Explicit pain points around credentialing timelines or licensing delays",
-      "Technology stack details for provider data management",
-      "Rate of new provider additions to network",
-      "Specific oncology specialties and subspecialties requiring credentialing",
-      "International expansion plans that would compound licensing complexity"
+      "Recent funding rounds or expansion announcements",
+      "Specific hiring trends or headcount growth",
+      "Named health plan customers",
+      "Size of provider network (number of oncology specialists)",
+      "Explicit pain points around credentialing or licensing processes",
+      "Technology stack or current provider data management systems"
     ]
   },
   "copy": {
-    "hero_headline": "Credentialing infrastructure for oncology networks that span 50 states",
-    "subheadline": "OncoHealth manages 15M members across 22 health plans with a virtual medical group in every state. CertifyOS keeps your provider licensing, credentialing, and compliance current without the manual load.",
-    "value_prop_one_liner": "One system that automates multi-state licensing, credentialing, and URAC/NCQA compliance for specialty care networks at scale.",
-    "pain_paragraph": "When you're running the nation's first 50-state oncology virtual medical group, provider credentialing and state licensing aren't one-time tasks. They're continuous, state-specific, and critical to maintaining your 94% provider satisfaction and accreditation status. Manual tracking doesn't scale with 22 health plan partners and 4K employers counting on you.",
+    "hero_headline": "Provider licensing across 50 states shouldn't slow your oncology network",
+    "subheadline": "OncoHealth manages oncology care for 15M members and 22 health plans. CertifyOS keeps your virtual medical group credentialed, compliant, and ready to scale.",
+    "value_prop_one_liner": "A single platform to manage multi-state licensing, health plan enrollment, and credential monitoring for your oncology specialists.",
+    "pain_paragraph": "Running a 50-state virtual medical group means constant credential renewals, varying state license requirements, and enrollment backlogs across 22 health plan contracts. Manual tracking breaks down at scale. Providers wait. Plans push for network adequacy. Your team juggles spreadsheets while trying to maintain 94% provider satisfaction.",
     "cta_primary": {
       "text": "See how it works for oncology networks",
       "intent": "demo"
     },
     "cta_secondary": {
-      "text": "Read: Multi-state credentialing for virtual care",
-      "intent": "content"
+      "text": "Talk to our team",
+      "intent": "contact"
     }
   }
 }

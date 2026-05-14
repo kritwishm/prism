@@ -26,3 +26,4 @@ build/
 .playwright-mcp/
 *.log
 /tmp/
+/scripts/gh-flip.sh

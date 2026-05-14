@@ -78,6 +78,10 @@ const FIELDS = /* groq */ `
   scoreBreakdown
 `;
 
+// Score floor below which a doc exists in Sanity but isn't rendered as a page.
+// Keep in sync with prism/scoring.py:COPY_SCORE_FLOOR.
+export const RENDER_SCORE_FLOOR = 50;
+
 export async function getAnalysisBySlug(
   slug: string
 ): Promise<CompanyAnalysis | null> {
@@ -92,9 +96,11 @@ export async function getAnalysisBySlug(
   );
 }
 
+// Public-facing list: only renders accounts above the score floor.
+// The full analysis (including sub-floor) lives in Sanity Studio.
 export async function listAnalyses(): Promise<CompanyAnalysis[]> {
   return sanity.fetch(
-    `*[_type=="companyAnalysis"] | order(icpScore desc){${FIELDS}}`,
+    `*[_type=="companyAnalysis" && icpScore >= ${RENDER_SCORE_FLOOR}] | order(icpScore desc){${FIELDS}}`,
     {},
     { next: { revalidate: 60, tags: ["analysis:list"] } }
   );

@@ -51,28 +51,21 @@ async def run_pipeline(url: str, dump_dir: Optional[str] = None) -> dict:
                      "hubspot_id": None, "sanity_url": None, "writes_complete": False},
         )
 
-    # Stage 3: Sanity write — ONLY for accounts at or above the floor.
-    # Sub-floor accounts go to HubSpot only (the ICP score + reasoning is
-    # still useful for "don't pursue" calls). Keeping Sanity clean of
-    # misfits means the marketer queue is the actionable queue.
-    if icp.icp_score >= COPY_SCORE_FLOOR:
-        sanity_doc_id = await upsert_company_analysis(
-            domain=scrape.domain,
-            facts=facts,
-            icp=icp,
-            copy=copy,
-            source_url=url,
-            pages_scraped=scrape.pages_succeeded,
-            data_confidence=scrape.confidence,
-        )
-        sanity_url = get_sanity_doc_url(sanity_doc_id)
-    else:
-        sanity_doc_id = None
-        sanity_url = ""
-        logger.info(
-            f"[PIPELINE] skipping Sanity write — score {icp.icp_score} "
-            f"below floor {COPY_SCORE_FLOOR} (Tier {icp.icp_tier})"
-        )
+    # Stage 3: Sanity write. Every analysis lands here. Sanity is the
+    # analysis-of-record across all tiers. The render layer (see render/)
+    # filters by icpScore >= COPY_SCORE_FLOOR to decide which docs become
+    # public pages. `copy` will be None for sub-floor accounts; the doc
+    # still exists with facts + signals + breakdown.
+    sanity_doc_id = await upsert_company_analysis(
+        domain=scrape.domain,
+        facts=facts,
+        icp=icp,
+        copy=copy,
+        source_url=url,
+        pages_scraped=scrape.pages_succeeded,
+        data_confidence=scrape.confidence,
+    )
+    sanity_url = get_sanity_doc_url(sanity_doc_id)
 
     # Stage 4: HubSpot write
     hubspot_id = upsert_company(
@@ -83,12 +76,11 @@ async def run_pipeline(url: str, dump_dir: Optional[str] = None) -> dict:
         data_confidence=scrape.confidence,
     )
 
-    # Stage 5: backlink HubSpot id into Sanity (only when a Sanity doc exists)
-    if sanity_doc_id:
-        try:
-            await patch_hubspot_backlink(sanity_doc_id, hubspot_id)
-        except Exception as e:
-            logger.warning(f"[PIPELINE] sanity backlink patch failed (non-fatal): {e}")
+    # Stage 5: backlink HubSpot id into Sanity (Sanity doc always exists now)
+    try:
+        await patch_hubspot_backlink(sanity_doc_id, hubspot_id)
+    except Exception as e:
+        logger.warning(f"[PIPELINE] sanity backlink patch failed (non-fatal): {e}")
 
     result = {
         "success": True,
